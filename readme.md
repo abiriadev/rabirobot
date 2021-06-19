@@ -17,3 +17,7 @@ Discord Server : https://discord.gg/aZsXbxC7rz
 * etc. . .
 
 ------
+### 오류
+
+* 번역 api가 구버전 api 제외 작동불능
+  * 구버전 api를 사용하여 해결 가능
