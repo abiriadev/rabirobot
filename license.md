@@ -1,3 +1,0 @@
-MIT license
-
-test
