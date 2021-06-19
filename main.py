@@ -1,12 +1,15 @@
+import asyncio
+import os
 import discord
 from discord import message
 from discord.ext import commands
 from discord import User
-import asyncio
-import os
+import config
+
+
 bot = commands.Bot(command_prefix='r/')
-#--------------------------------------------
 os.system("cls")
+
 @bot.event
 async def on_ready():
     print(bot.user.name, '봇이 준비되었습니다!')
@@ -25,5 +28,4 @@ async def ping(ctx):
         description=f" ping : {round(bot.latency * 1000)}ms",
         color=discord.Colour.default()))
 
-#------------------------------------------------------------------------
-bot.run('ODU1NjUyODM3MjM2NjcwNDY0.YM1mzQ.2fiCLc8Tlc23ps-IrQ4NVQArCnc')
+bot.run(config.bot_token)
