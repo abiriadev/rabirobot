@@ -1,0 +1,9 @@
+{
+  "name": "Rabirobot",
+  "version": "1.0.0",
+  "description": "rabirobot",
+  "main": "index.js",
+  "repository": "https://github.com/KaiNiGHt/rabirobot.git",
+  "author": "KaiNiGHt <68188784+KaiNiGHt@users.noreply.github.com>",
+  "license": "MIT"
+}
