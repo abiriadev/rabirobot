@@ -56,7 +56,6 @@ class Chat(commands.Cog):
         embed = discord.Embed(
         title="🛠 도움말",
         description=f"""[명령어 모음]
-        ※ 접두사는 r/입니다. ※
         핑 : 봇의 레이턴시를 출력합니다.
         번역 : googletrans를 이용해 외국어를 한국어로 번역합니다.
         도움말 : 이 도움말 메세지를 표시합니다.

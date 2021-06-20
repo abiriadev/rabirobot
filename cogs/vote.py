@@ -11,7 +11,7 @@ class Vote(commands.Cog):
 
     @commands.command(name='투표', aliases=['vote'])
     async def vote(self, ctx: commands.Context, **kwargs):
-
+        ...
 
 
 def setup(bot):

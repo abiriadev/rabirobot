@@ -1,9 +1,9 @@
-from files import utils
 import discord
-from files.utils import emoji
-from database import db
 from discord.ext import commands
 
+from database import db
+from files import utils
+from files.emoji import CustomEmoji
 
 class Money(commands.Cog):
     def __init__(self, bot):
@@ -32,7 +32,7 @@ class Money(commands.Cog):
             mon = money / tox
             money = f"{mon}E{length}"
         embed = discord.Embed(
-            description=f"{user.mention}님의 라비머니는 현재 **{money}**{emoji['money']} 입니다.",
+            description=f"{user.mention}님의 라비머니는 현재 **{money}**{CustomEmoji.money} 입니다.",
             color=discord.Colour.blurple()
         )
         print(money)
