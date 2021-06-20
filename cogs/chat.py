@@ -18,7 +18,7 @@ class Chat(commands.Cog):
         await ctx.send(embed=embed)
 
     # BUG self.translator.detect(text)에 AttributeError: 'NoneType' object has no attribute 'group' 오류
-
+    #  googleTrans 모듈의 버전 문제, 구버전으로 설치 후 문제 없음 확인
     @commands.command(name='번역', aliases=['trans', 'translate'])
     async def translate_command(self, ctx, *, text):
         await ctx.trigger_typing()
