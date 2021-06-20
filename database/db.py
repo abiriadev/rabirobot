@@ -46,6 +46,7 @@ class Players:
             self.players = {}
         if item not in self.players.keys():
             self.players[item] = {}
+        self.save()
         return PlayerData(item, self.players[item])
 
     def __iter__(self):

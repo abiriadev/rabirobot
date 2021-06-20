@@ -3,5 +3,6 @@ bot_prefix = 'r/'
 
 extensions = [
     'cogs.chat',
-    'cogs.money'
+    'cogs.money',
+    'cogs.debug',
 ]
