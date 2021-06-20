@@ -42,7 +42,7 @@ class Debug(commands.Cog):
 
         db.players[togive.id].money += money
 
-        await ctx.send(f"**{togive.name}**에게 ${money}줌")
+        await ctx.send(f"**{togive.name}**에게 {money}줌")
 
     @commands.command(name='d_돈설정', aliases=['d_setmoney'])
     async def setmoney(self, ctx: commands.Context, *args):
@@ -73,7 +73,7 @@ class Debug(commands.Cog):
 
         db.players[togive.id].money += money
 
-        await ctx.send(f"**{togive.name}**돈 ${money}로설정함")
+        await ctx.send(f"**{togive.name}**돈 {money}로설정함")
 
 
 def setup(bot):
