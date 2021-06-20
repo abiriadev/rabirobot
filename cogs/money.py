@@ -32,7 +32,7 @@ class Money(commands.Cog):
             mon = money / tox
             money = f"{mon}E{length}"
         embed = discord.Embed(
-            description=f"{user.mention}님의 라비머니는 현재 **{money}**<:rabirocoin:855796110128185344> 입니다.",
+            description=f"{user.mention}님의 라비머니는 현재 **{money}** 입니다.",
             color=discord.Colour.blurple()
         )
         print(money)
