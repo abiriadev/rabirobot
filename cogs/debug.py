@@ -19,6 +19,7 @@ class Debug(commands.Cog):
         money: int
         if len(args) == 0:
             await ctx.send("줄 돈을 써")
+            return
         elif len(args) == 1:
             togive = ctx.author
             money = args[0]
@@ -49,6 +50,7 @@ class Debug(commands.Cog):
         money: int
         if len(args) == 0:
             await ctx.send("설정할 돈을 써")
+            return
         elif len(args) == 1:
             togive = ctx.author
             money = args[0]
