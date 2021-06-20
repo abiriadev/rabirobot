@@ -51,11 +51,17 @@ class Chat(commands.Cog):
 
         await ctx.send(embed=embed)
 
-    @commands.command(name='bothelp', aliases=['도움말', 'h', 'b_help'])
-    async def bothelp(self, ctx):
+    @commands.command(name='help', aliases=['도움말', '도움', '도', 'ㄷ', 'hel', 'he', 'h'])
+    async def help(self, ctx):
         embed = discord.Embed(
         title="🛠 도움말",
-        description=f"[명령어 모음] \n ※ 접두사는 r/입니다. ※ \n 핑 : 봇의 레이턴시를 출력합니다. \n 번역 : googletrans를 이용해 외국어를 한국어로 번역합니다. \n 도움말 : 이 도움말 메세지를 표시합니다. \n 돈 : 보유 중인 라비머니를 표시합니다. \n",
+        description=f"""[명령어 모음]
+        ※ 접두사는 r/입니다. ※
+        핑 : 봇의 레이턴시를 출력합니다.
+        번역 : googletrans를 이용해 외국어를 한국어로 번역합니다.
+        도움말 : 이 도움말 메세지를 표시합니다.
+        돈 : 보유 중인 라비머니를 표시합니다.
+        """,
         color=0xF03A17
         
         )

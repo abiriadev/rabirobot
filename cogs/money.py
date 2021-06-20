@@ -1,6 +1,6 @@
 from files import utils
 import discord
-
+from files.utils import emoji
 from database import db
 from discord.ext import commands
 
@@ -15,7 +15,7 @@ class Money(commands.Cog):
         if user is None:
             user: discord.User = ctx.author
         else:
-            user: discord.User   = utils.parseUser(ctx.guild, user)
+            user: discord.User = utils.parseUser(ctx.guild, user)
             if user == None:
                 embed = discord.Embed(
                     description=f"**{userstr}** 유저를 찾을 수 없습니다.",
@@ -32,7 +32,7 @@ class Money(commands.Cog):
             mon = money / tox
             money = f"{mon}E{length}"
         embed = discord.Embed(
-            description=f"{user.mention}님의 라비머니는 현재 **{money}** 입니다.",
+            description=f"{user.mention}님의 라비머니는 현재 **{money}**{emoji['money']} 입니다.",
             color=discord.Colour.blurple()
         )
         print(money)

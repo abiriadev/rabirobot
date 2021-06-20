@@ -1,14 +1,14 @@
-def parseUser(guild, input):
+def parseUser(guild, toParse):
     try:
-        user = int(input)
-        result = guild.get_member(input)
+        user = int(toParse)
+        result = guild.get_member(toParse)
         if result is None:
             return None
     except ValueError:
-        result = guild.get_member_named(input)
+        result = guild.get_member_named(toParse)
         if result is None:
             try:
-                result = guild.get_member(int(input[3:-1]))
+                result = guild.get_member(int(toParse[3:-1]))
                 if result is None:
                     return
             except ValueError:
@@ -37,6 +37,6 @@ emoji = {
     18: '<:18:856122825399468032> ',
     19: '<:19:856122825449799680> ',
     20: '<:20:856122825437872128>',
-    "rcoin": '<:rabirocoin:855796110128185344>'
+    "money": '<:rabirocoin:855796110128185344>'
 }
 

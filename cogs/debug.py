@@ -60,7 +60,7 @@ class Debug(commands.Cog):
 
         db.players[user.id].money = money
 
-        await ctx.send(f"**{user.name}**의 돈을 {money}로 설정함")
+        await ctx.send(f"**{user.name}**에게 {money}만큼 돈 줌")
 
     @debug.command(name='eval')
     async def eval_command(self, ctx, *, args):
