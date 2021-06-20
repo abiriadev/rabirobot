@@ -39,11 +39,11 @@ class Debug(commands.Cog):
             user = ctx.author
 
         if money is None:
-            await ctx.send("설정할 돈을 써")
+            await ctx.send("지급할 돈을 써")
 
         db.players[user.id].money += money
 
-        await ctx.send(f"**{user.name}**의 돈을 {money}로 설정함")
+        await ctx.send(f"**{user.name}**에게 {money}을 줌")
 
     @debug.command(name='돈설정', aliases=['setmoney'])
     async def setmoney(
