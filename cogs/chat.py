@@ -2,12 +2,13 @@ import discord
 from discord.ext import commands
 from googletrans import Translator
 
+
 class Chat(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.translator = Translator(service_urls=['translate.google.co.kr'])
 
-    @commands.command(name='핑')
+    @commands.command(name='핑', aliases=['ping'])
     async def ping(self, ctx):
         embed = discord.Embed(
             title="🏓 퐁!",
@@ -26,14 +27,14 @@ class Chat(commands.Cog):
         language = self.translator.detect(text).lang
         translate = self.translator.translate
 
-        if language == 'ko': 
+        if language == 'ko':
             translate_result = translate(text)
 
             result_text = translate_result.text
             result_pronunciation = translate_result.pronunciation
 
         else:
-            translate_result = translate(text, dest = 'ko')
+            translate_result = translate(text, dest='ko')
 
             result_text = translate_result.text
             result_pronunciation = translate_result.pronunciation
@@ -45,10 +46,11 @@ class Chat(commands.Cog):
             [구글 번역기](https://translate.google.com/)''',
             color=discord.Colour.blurple()
         )
-        
+
         embed.add_field(name=result_text, value=f'"{result_pronunciation}"')
 
         await ctx.send(embed=embed)
+
 
 def setup(bot):
     bot.add_cog(Chat(bot))

@@ -1,9 +1,5 @@
-import asyncio
-import os
 import discord
-from discord import message
 from discord.ext import commands
-from discord import User
 import config
 
 
@@ -24,6 +20,7 @@ class Main(commands.AutoShardedBot):
             status=discord.Status.online,
             activity=discord.Game('봇 테스트')
         )
+
 
 bot = Main()
 bot.run(config.bot_token)
