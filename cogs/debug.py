@@ -1,78 +1,78 @@
+from typing import Union
+import inspect
+from pprint import pformat
+
 import discord
 from discord.ext import commands
+
 from database import db
 from files import utils
-
+import config
 
 class Debug(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name='d_저장', aliases=['d_save'])
+    # 봇의 오너(관리자)인지 체크. True면 사용 가능 False면 동전의 반대
+    async def cog_check(self, ctx):
+        if ctx.author.id in config.bot_owner:
+            return True
+
+    @commands.group(name='디버그', aliases=['debug', 'd', '디'])
+    async def debug(self, ctx):
+        ...
+
+    @debug.command(name='저장', aliases=['save'])
     async def save(self, ctx: commands.Context):
         db.players.save()
         await ctx.send("저장했음")
 
-    @commands.command(name='d_돈주기', aliases=['d_givemoney'])
-    async def givemoney(self, ctx: commands.Context, *args):
-        togive: discord.User
-        money: int
-        if len(args) == 0:
-            await ctx.send("줄 돈을 써")
-        elif len(args) == 1:
-            togive = ctx.author
-            money = args[0]
-        else:
-            guild: discord.Guild = ctx.guild
-            user = args[0]
+    # TODO 타입 체크 익셉션 핸들링
+    @debug.command(name='돈주기', aliases=['돈지급', 'givemoney'])
+    async def givemoney(
+        self,
+        ctx: commands.Context,
+        money: Union[int, None] = None,
+        user: Union[discord.Member, discord.User, int, str, None] = None
+    ):
+        if user is None:
+            user = ctx.author
 
-            togive = utils.parseUser(ctx.guild, args[0])
-            if togive is None:
-                await ctx.send("멤버를 찾을수 없어")
-                return
-
-            money = args[1]
-
-        try:
-            money = int(money)
-        except ValueError:
-            await ctx.send("그거 돈 아닌데")
-            return
-
-        db.players[togive.id].money += money
-
-        await ctx.send(f"**{togive.name}**에게 ${money}줌")
-
-    @commands.command(name='d_돈설정', aliases=['d_setmoney'])
-    async def setmoney(self, ctx: commands.Context, *args):
-        togive: discord.User
-        money: int
-        if len(args) == 0:
+        if money is None:
             await ctx.send("설정할 돈을 써")
-        elif len(args) == 1:
-            togive = ctx.author
-            money = args[0]
+
+        db.players[user.id].money += money
+
+        await ctx.send(f"**{user.name}**의 돈을 {money}로 설정함")
+
+    @debug.command(name='돈설정', aliases=['setmoney'])
+    async def setmoney(
+        self,
+        ctx: commands.Context,
+        money: Union[int, None] = None,
+        user: Union[discord.Member, discord.User, int, str, None] = None
+    ):
+        if user is None:
+            user = ctx.author
+
+        if money is None:
+            await ctx.send("설정할 돈을 써")
+
+        db.players[user.id].money = money
+
+        await ctx.send(f"**{user.name}**의 돈을 {money}로 설정함")
+
+    @debug.command(name='eval')
+    async def eval_command(self, ctx, *, args):
+        res = eval(args)
+        
+        if inspect.isawaitable(res): 
+            output = await res
         else:
-            guild: discord.Guild = ctx.guild
-            user = args[0]
+            output = res
 
-            togive = utils.parseUser(ctx.guild, args[0])
-            if togive is None:
-                await ctx.send("멤버를 찾을수 없어")
-                return
-
-            money = args[1]
-
-        try:
-            money = int(money)
-        except ValueError:
-            await ctx.send("그거 돈 아닌데")
-            return
-
-        db.players[togive.id].money += money
-
-        await ctx.send(f"**{togive.name}**돈 ${money}로설정함")
-
+        output = pformat(output)
+        await ctx.send(f'```py\n{output}\n```')
 
 def setup(bot):
     bot.add_cog(Debug(bot))
