@@ -51,7 +51,7 @@ class Chat(commands.Cog):
 
         await ctx.send(embed=embed)
 
-    @commands.command(name='help', aliases=['도움말', '도움', '도', 'ㄷ', 'hel', 'he', 'h'])
+    @commands.command(name='help', aliases=['도움말', '도움', '도', 'ㄷ', '명령어', '커맨드', 'commands', 'command', 'h'])
     async def help(self, ctx):
         embed = discord.Embed(
         title="🛠 도움말",

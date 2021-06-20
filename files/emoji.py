@@ -1,5 +1,3 @@
-
-
 class CustomEmoji:
     empty = '<:empty:817693554658639882>'
     next = '<:next:769502361827409930>'
