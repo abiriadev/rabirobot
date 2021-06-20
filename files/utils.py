@@ -1,4 +1,3 @@
-
 def parseUser(guild, input):
     try:
         user = int(input)
