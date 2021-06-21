@@ -6,4 +6,5 @@ extensions = [
     'cogs.chat',
     'cogs.money',
     'cogs.debug',
+    'cogs.event'
 ]
