@@ -13,7 +13,7 @@ class Chat(commands.Cog):
         embed = discord.Embed(
             title="🏓 퐁!",
             description=f"봇의 레이턴시 : {round(self.bot.latency * 1000)}ms",
-            color=0xF03A17
+            color=discord.Colour.red()
         )
 
         await ctx.send(embed=embed)
@@ -61,7 +61,7 @@ class Chat(commands.Cog):
         도움말 : 이 도움말 메세지를 표시합니다.
         돈 : 보유 중인 라비머니를 표시합니다.
         """,
-        color=0xF03A17
+        color=discord.Colour.red()
         
         )
         await ctx.send(embed=embed)

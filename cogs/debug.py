@@ -33,7 +33,7 @@ class Debug(commands.Cog):
             돈설정 : 선택한 유저의 돈의 데이터를 덮어씌움.
             eval  : 파이썬의 eval 함수를 실행시킴.
             """,
-            color=0xF03A17
+            color=discord.Colour.red()
         )
 
         await ctx.send("디버그 도움말을 DM으로 보냈어요. 전송되지 않았을 경우, 다이렉트 메시지를 막아 두었는지 확인해 주세요.")
@@ -110,14 +110,14 @@ class Debug(commands.Cog):
             embed = discord.Embed(
                 title='🛑 제한됨',
                 description='eval이나 exec 등은 사용할 수 없습니다.',
-                color=0xF03A17
+                color=discord.Colour.red()
             )
 
         else:
             embed = discord.Embed(
                 title='🛑 제한됨',
                 description='민감한 정보는 전송할 수 없습니다.',
-                color=0xF03A17
+                color=discord.Colour.red()
             )
 
         await ctx.send(embed=embed)

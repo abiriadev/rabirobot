@@ -12,7 +12,7 @@ class Data:
         self.votes = {}
 
     def __getitem__(self, item: int):
-        if self.players == None:
+        if self.players is None:
             self.players = {}
         if item not in self.players.keys():
             self.players[item] = {}

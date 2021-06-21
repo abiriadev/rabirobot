@@ -30,10 +30,10 @@ class VoteData:
         self._id = id
         self._selfDict = selfDict
         if "title" not in self._selfDict:
-            self._selfDict["title"] = 0
+            self._selfDict["title"] = "Title placeholder"
 
         if "description" not in self._selfDict:
-            self._selfDict["description"] = 0
+            self._selfDict["description"] = "Description placeholder"
 
         if "fields" not in self._selfDict:
-            self._selfDict["fields"] = 0
+            self._selfDict["fields"] = {"field0:name": "field0:value"}
