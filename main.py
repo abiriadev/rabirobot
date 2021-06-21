@@ -1,9 +1,6 @@
-from cogs import chat
-
 import discord
 from discord.ext import commands
 
-import cogs.debug
 import config
 import os
 

@@ -24,17 +24,20 @@ class Debug(commands.Cog):
 
     @debug.command(name='help', aliases=['도움말', '도움', '도', 'ㄷ', '명령어', '커맨드', 'commands', 'command', 'h'])
     async def db_help(self, ctx):
-        await ctx.send("디버그 도움말을 DM으로 보냈음.")
-        await ctx.author.send(embed = discord.Embed(
-        title="🛠 도움말",
-        description=f"""[디버그 : 명령어 모음]
-        저장 : 변경된 정보를 저장함.
-        돈주기 : 입력한 수만큼 선택 유저에게 돈을 지급(-도 가능.)
-        도움말 : 이 도움말 메세지를 표시함.
-        돈설정 : 선택한 유저의 돈의 데이터를 덮어씌움.
-        """,
-        color=0xF03A17
-        ))
+        embed = discord.Embed(
+            title="🛠 도움말",
+            description=f"""[디버그 : 명령어 모음]
+            저장 : 변경된 정보를 저장함.
+            돈주기 : 입력한 수만큼 선택 유저에게 돈을 지급(-도 가능.)
+            도움말 : 이 도움말 메세지를 표시함.
+            돈설정 : 선택한 유저의 돈의 데이터를 덮어씌움.
+            """,
+            color=0xF03A17
+        )
+
+        await ctx.send("디버그 도움말을 DM으로 보냈어요. 전송되지 않았을 경우, 다이렉트 메시지를 막아 두었는지 확인해 주세요.")
+        await ctx.author.send(embed=embed)
+
     @debug.command(name='저장', aliases=['save'])
     async def save(self, ctx: commands.Context):
         db.players.save()
@@ -76,7 +79,7 @@ class Debug(commands.Cog):
         await ctx.send(f"**{user.name}**에게 {money}만큼 돈 줌")
 
     @debug.command(name='eval')
-    async def eval_command(self, ctx, *, args):
+    async def eval_command(self, ctx, *, args: str):
         res = eval(args)
         
         if inspect.isawaitable(res): 
@@ -84,8 +87,39 @@ class Debug(commands.Cog):
         else:
             output = res
 
-        output = pformat(output)
-        await ctx.send(f'```py\n{output}\n```')
+        if not (
+            'token' in args.lower() or
+            'secret' in args.lower() or
+            'config' in args.lower() or
+            config.bot_token in str(output)
+        ):
+            embed = discord.Embed(
+                title='📝 Eval',
+                color=0xFDCE4C
+            )
+
+            embed.add_field(name='📥 인풋', value=f'```py\n{args}```', inline=False)
+            embed.add_field(name='📤 아웃풋', value=f'```py\n{pformat(output)}```')
+            embed.add_field(name='🔍 타입', value=f'```py\n{type(output)}```')
+
+        elif (
+            'eval' in args.lower() or
+            'exec' in args.lower()
+        ):
+            embed = discord.Embed(
+                title='🛑 제한됨',
+                description='eval이나 exec 등은 사용할 수 없습니다.',
+                color=0xF03A17
+            )
+
+        else:
+            embed = discord.Embed(
+                title='🛑 제한됨',
+                description='민감한 정보는 전송할 수 없습니다.',
+                color=0xF03A17
+            )
+
+        await ctx.send(embed=embed)
 
 def setup(bot):
     bot.add_cog(Debug(bot))
