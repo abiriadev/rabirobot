@@ -27,11 +27,12 @@ class Debug(commands.Cog):
         embed = discord.Embed(
             title="🛠 도움말",
             description=f"""[디버그 : 명령어 모음]
-            저장  : 변경된 정보를 저장함.
+            저장   : 변경된 정보를 저장함.
             돈주기 : 입력한 수만큼 선택 유저에게 돈을 지급(-도 가능.)
             도움말 : 이 도움말 메세지를 표시함.
             돈설정 : 선택한 유저의 돈의 데이터를 덮어씌움.
             eval  : 파이썬의 eval 함수를 실행시킴.
+            info  : 봇 정보를 출력함
             """,
             color=discord.Colour.red()
         )
@@ -121,6 +122,18 @@ class Debug(commands.Cog):
             )
 
         await ctx.send(embed=embed)
+    @debug.command(name="version", aliases=['ver', 'info', '버전', '정보'])
+    async def botversion(self, ctx):
+        await ctx.send("아직 개발중인 버전이라 정확한 버전은 없어요!")
+        #TODO 정식 출시 시 이 부분 버전명으로 수정
+
+        await ctx.send(
+            embed = discord.Embed(
+                title='bot info',
+                description='bot version : 정해지지 않음 \n developers : kainaght, papertoy1127, ppapman1, 321PLEK, Abiria \n',
+                color=discord.Colour.red()
+            )
+        )
 
 def setup(bot):
     bot.add_cog(Debug(bot))

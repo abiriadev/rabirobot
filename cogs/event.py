@@ -12,6 +12,7 @@ class EventHandler(commands.Cog):
     async def on_ready(self):
         os.system("cls")
         print(f'이 봇이 {self.bot.user}({self.bot.user.id})에 연결됐어요!')
+        print("----------")
 
         # TODO 정식 출시 시 이 내용 수정
         activity = discord.Activity(name='🐛 버그 잡는 모습', type=discord.ActivityType.watching)
