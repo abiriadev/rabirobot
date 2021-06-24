@@ -16,7 +16,8 @@ class EventHandler(commands.Cog):
     async def on_ready(self):
         os.system("cls")
         print(f'이 봇이 {self.bot.user}({self.bot.user.id})에 연결됐어요!')
-        print("----------")
+        print("ERROR / OUTPUT")
+        print("--------------")
 
         build_channel: discord.TextChannel = self.bot.get_channel(config.build_channel)
         last_build = await build_channel.history(limit=1, oldest_first=False).flatten()
@@ -32,8 +33,10 @@ class EventHandler(commands.Cog):
                     config.build = int(embed.title.split(' ')[-1]) + 1
                 except:
                     config.build = 1
-            print(config.build)
-
+            print("BUILD      |", config.identifier, config.build)
+            print("VERSION    |", config.version)
+            print("DEBUG MODE |", config.debug)
+            print("")
         config.build_string = f"{config.identifier.title()} Build {config.build}" if config.debug else f"{config.version}-{config.identifier}.{config.build}"
 
         build_embed = discord.Embed(title=config.build_string, color=discord.Color.from_rgb(random.randrange(0, 255), random.randrange(0, 255), random.randrange(0, 255)))

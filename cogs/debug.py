@@ -137,7 +137,7 @@ class Debug(commands.Cog):
 papertoy1127
 ppapman1
 321PLEK
-Abiri''', inline=False)
+Abiria''', inline=False)
         info.add_field(name="Hyperlink test", value="This is [github](https://github.com/)")
 
         info.set_thumbnail(url="https://cdn.discordapp.com/avatars/855652837236670464/334c3952a503bc101b8ced247a335c05.webp?size=256")
