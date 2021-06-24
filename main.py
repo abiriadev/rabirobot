@@ -1,3 +1,5 @@
+import datetime
+
 import discord
 from discord.ext import commands
 
@@ -14,6 +16,7 @@ class Main(commands.AutoShardedBot):
 
         for extension in config.extensions:
             self.load_extension(extension)
+
 
 bot = Main()
 bot.run(config.bot_token)

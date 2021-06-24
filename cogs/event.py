@@ -1,7 +1,11 @@
+import datetime
 import os
+import random
 
 import discord
 from discord.ext import commands
+
+import config
 
 
 class EventHandler(commands.Cog):
@@ -13,6 +17,30 @@ class EventHandler(commands.Cog):
         os.system("cls")
         print(f'이 봇이 {self.bot.user}({self.bot.user.id})에 연결됐어요!')
         print("----------")
+
+        build_channel: discord.TextChannel = self.bot.get_channel(config.build_channel)
+        last_build = await build_channel.history(limit=1, oldest_first=False).flatten()
+        last_build: discord.Message = last_build[0]
+        if len(last_build.embeds) == 0:
+            config.build = 1
+        else:
+            embed = last_build.embeds[0]
+            try:
+                config.build = int(embed.title.split('.')[-1]) + 1
+            except:
+                try:
+                    config.build = int(embed.title.split(' ')[-1]) + 1
+                except:
+                    config.build = 1
+            print(config.build)
+
+        config.build_string = f"{config.identifier.title()} Build {config.build}" if config.debug else f"{config.version}-{config.identifier}.{config.build}"
+
+        build_embed = discord.Embed(title=config.build_string, color=discord.Color.from_rgb(random.randrange(0, 255), random.randrange(0, 255), random.randrange(0, 255)))
+        build_embed._timestamp = datetime.datetime.utcnow()
+
+        await build_channel.send(embed=build_embed)
+
 
         # TODO 정식 출시 시 이 내용 수정
         activity = discord.Activity(name='🐛 버그 잡는 모습', type=discord.ActivityType.watching)

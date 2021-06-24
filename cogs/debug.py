@@ -9,6 +9,7 @@ from database import db
 from files import utils
 import config
 
+
 class Debug(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -48,10 +49,10 @@ class Debug(commands.Cog):
     # TODO 타입 체크 익셉션 핸들링
     @debug.command(name='돈주기', aliases=['돈지급', 'givemoney'])
     async def givemoney(
-        self,
-        ctx: commands.Context,
-        money: Union[int, None] = None,
-        user: Union[discord.Member, discord.User, int, str, None] = None
+            self,
+            ctx: commands.Context,
+            money: Union[int, None] = None,
+            user: Union[discord.Member, discord.User, int, str, None] = None
     ):
         if user is None:
             user = ctx.author
@@ -65,10 +66,10 @@ class Debug(commands.Cog):
 
     @debug.command(name='돈설정', aliases=['setmoney'])
     async def setmoney(
-        self,
-        ctx: commands.Context,
-        money: Union[int, None] = None,
-        user: Union[discord.Member, discord.User, int, str, None] = None
+            self,
+            ctx: commands.Context,
+            money: Union[int, None] = None,
+            user: Union[discord.Member, discord.User, int, str, None] = None
     ):
         if user is None:
             user = ctx.author
@@ -83,17 +84,17 @@ class Debug(commands.Cog):
     @debug.command(name='eval')
     async def eval_command(self, ctx, *, args: str):
         res = eval(args)
-        
-        if inspect.isawaitable(res): 
+
+        if inspect.isawaitable(res):
             output = await res
         else:
             output = res
 
         if not (
-            'token' in args.lower() or
-            'secret' in args.lower() or
-            'config' in args.lower() or
-            config.bot_token in str(output)
+                'token' in args.lower() or
+                'secret' in args.lower() or
+                'config' in args.lower() or
+                config.bot_token in str(output)
         ):
             embed = discord.Embed(
                 title='📝 Eval',
@@ -105,8 +106,8 @@ class Debug(commands.Cog):
             embed.add_field(name='🔍 타입', value=f'```py\n{type(output)}```')
 
         elif (
-            'eval' in args.lower() or
-            'exec' in args.lower()
+                'eval' in args.lower() or
+                'exec' in args.lower()
         ):
             embed = discord.Embed(
                 title='🛑 제한됨',
@@ -122,18 +123,29 @@ class Debug(commands.Cog):
             )
 
         await ctx.send(embed=embed)
+
     @debug.command(name="version", aliases=['ver', 'info', '버전', '정보'])
     async def botversion(self, ctx):
-        await ctx.send("아직 개발중인 버전이라 정확한 버전은 없어요!")
-        #TODO 정식 출시 시 이 부분 버전명으로 수정
-
-        await ctx.send(
-            embed = discord.Embed(
-                title='bot info',
-                description='bot version : 정해지지 않음 \n developers : kainaght, papertoy1127, ppapman1, 321PLEK, Abiria \n',
+        info = discord.Embed(
+                title='Bot info',
+                description="",
                 color=discord.Colour.red()
             )
+
+        info.add_field(name="Version", value=config.build_string, inline=False)
+        info.add_field(name="Developers", value='''kainaght
+papertoy1127
+ppapman1
+321PLEK
+Abiri''', inline=False)
+        info.add_field(name="Hyperlink test", value="This is [github](https://github.com/)")
+
+        info.set_thumbnail(url="https://cdn.discordapp.com/avatars/855652837236670464/334c3952a503bc101b8ced247a335c05.webp?size=256")
+
+        await ctx.send(
+            embed=info
         )
+
 
 def setup(bot):
     bot.add_cog(Debug(bot))

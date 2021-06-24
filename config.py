@@ -10,6 +10,13 @@ bot_owner = [
     662201438621138954
 ]
 
+debug = True
+version = "0.0.0"
+identifier = "dev"
+build_string: str
+build_channel = 857491495305216030
+build: int
+
 extensions = [
     'cogs.chat',
     'cogs.money',
