@@ -18,13 +18,15 @@ class Vote(commands.Cog):
     async def vote(self, ctx):
         ...
 
+
     @vote.command(name='만들기', aliases=['create', 'new', '제작'])
-    async def create_vote(self, ctx: commands.Context, channel: Union[discord.TextChannel, None],
-                          title="title placeholder",
-                          desc="dess placeholder"):
+    async def create_vote(self, ctx: commands.Context, channel: Union[discord.TextChannel, None], title='제목 없는 투표', desc=''):
         if channel is None:
             channel = ctx.channel
-
+        if title is None:
+            title="제목 없는 투표"
+        if desc is None:
+            desc=""
         if channel.id in db.database.votes.keys():
             await ctx.send(
                 embed=discord.Embed(title="", description="🛑 이미 진행 중인 투표가 있습니다!", color=discord.Colour.red()))
@@ -32,6 +34,7 @@ class Vote(commands.Cog):
         vote = db.database.Vote(channel.id)
         vote.title = title
         vote.description = desc
+
         await ctx.send(embed=vote.preview)
 
     @vote.command(name='프리뷰', aliases=['preview'])
@@ -171,7 +174,23 @@ class Vote(commands.Cog):
         await msg.edit(embed=msg.embeds[0])
         db.database.votes.pop(channel.id)
         await ctx.send(embed=result)
-
+    @vote.command(name='help', aliases=['도움말', '도움', '도', 'ㄷ', '명령어', '커맨드', 'commands', 'command', 'h'])
+    async def help(self, ctx):
+        embed = discord.Embed(
+            title="📋 투표 도움말",
+            description=f"""**투표 명령어 모음**
+            투표 만들기 : 새로운 투표를 생성합니다.
+            투표 프리뷰 : 투표 발행 전 프리뷰를 표시합니다.
+            도움말 : 이 도움말 메세지를 표시합니다.
+            투표 항목 추가 : 투표의 항목을 추가합니다.
+            투표 항목 삭제 : 투표의 항목을 제거합니다.
+            투표 발행 : 투표를 발행합니다.
+            투표 종료 : 진행중인 투표를 종료합니다.
+            자세한 도움말은 [__Rabirobot 위키__](https://github.com/KaiNiGHt/rabirobotdocs/wiki)를 확인해주세요.
+            """,
+            color=discord.Colour.red()
+        )
+        await ctx.send(embed=embed)
 
 
 
