@@ -1,11 +1,14 @@
 import datetime
 import os
 import random
+from typing import Union
 
 import discord
 from discord.ext import commands
 
 import config
+from database import db
+from database.vote import VoteData
 
 
 class EventHandler(commands.Cog):
@@ -56,7 +59,7 @@ class EventHandler(commands.Cog):
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
         if isinstance(error, (commands.CommandNotFound)):
-            return
+            error_desctiption = '명령어를 찾을 수 없어요.'
 
         # User Input Error
         elif isinstance(error, commands.MissingRequiredArgument):
@@ -83,7 +86,7 @@ class EventHandler(commands.Cog):
 
         elif isinstance(error.original, discord.Forbidden):
             error_desctiption = '봇에게 명령어 실행에 필요한 권한이 없없어요.'
-
+    
         # else - bot
         elif isinstance(error, commands.DisabledCommand):
             error_desctiption = '해당 명령어가 알 수 없는 이유로 비활성화 돼 있어요.'
@@ -106,6 +109,30 @@ class EventHandler(commands.Cog):
             color=0xF03A17
         )
         await ctx.send(embed=embed)
+
+        if config.debug:
+            raise error
+
+    @commands.Cog.listener()
+    async def on_raw_reaction_add(self, payload: discord.RawReactionActionEvent):
+        reaction: discord.RawReactionActionEvent = payload
+        user: Union[discord.Member, discord.User] = payload.member
+        if user == self.bot.user:
+            return
+
+        no_two_react = []
+        for vote in db.database.votes.keys():
+            vote: VoteData = db.database.Vote(vote)
+            no_two_react.append(vote.messageId)
+
+        if reaction.message_id in no_two_react:
+            chn: discord.TextChannel = self.bot.get_channel(reaction.channel_id)
+            msg: discord.Message = await chn.fetch_message(reaction.message_id)
+            for r in msg.reactions:
+                if r.emoji == payload.emoji:
+                    continue
+                if user in await r.users().flatten():
+                    await msg.remove_reaction(r.emoji, user)
 
 def setup(bot):
     bot.add_cog(EventHandler(bot))

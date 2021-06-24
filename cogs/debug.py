@@ -43,7 +43,7 @@ class Debug(commands.Cog):
 
     @debug.command(name='저장', aliases=['save'])
     async def save(self, ctx: commands.Context):
-        db.players.save()
+        db.database.save()
         await ctx.send("저장했음")
 
     # TODO 타입 체크 익셉션 핸들링
@@ -60,7 +60,7 @@ class Debug(commands.Cog):
         if money is None:
             await ctx.send("지급할 돈을 써")
 
-        db.players[user.id].money += money
+        db.database.Player(user.id).money += money
 
         await ctx.send(f"**{user.name}**에게 {money}을 줌")
 
@@ -77,7 +77,7 @@ class Debug(commands.Cog):
         if money is None:
             await ctx.send("설정할 돈을 써")
 
-        db.players[user.id].money = money
+        db.database.Player(user.id).money = money
 
         await ctx.send(f"**{user.name}**에게 {money}만큼 돈 줌")
 
@@ -133,12 +133,13 @@ class Debug(commands.Cog):
             )
 
         info.add_field(name="Version", value=config.build_string, inline=False)
-        info.add_field(name="Developers", value='''kainaght
-papertoy1127
-ppapman1
-321PLEK
-Abiria''', inline=False)
-        info.add_field(name="Hyperlink test", value="This is [github](https://github.com/)")
+        info.add_field(name="Developers",
+                       value='''kainaght
+                            papertoy1127
+                            ppapman1
+                            321PLEK
+                            Abiri''',
+                       inline=False)
 
         info.set_thumbnail(url="https://cdn.discordapp.com/avatars/855652837236670464/334c3952a503bc101b8ced247a335c05.webp?size=256")
 

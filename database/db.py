@@ -1,6 +1,7 @@
 import yaml
 
 from database.player import PlayerData
+from database.vote import VoteData
 
 
 class Data:
@@ -11,13 +12,22 @@ class Data:
         self.players = {}
         self.votes = {}
 
-    def __getitem__(self, item: int):
+    def Player(self, item: int):
         if self.players is None:
             self.players = {}
         if item not in self.players.keys():
             self.players[item] = {}
         self.save()
         return PlayerData(item, self.players[item])
+
+    def Vote(self, channel: int):
+        if self.votes is None:
+            self.votes = {}
+        if channel not in self.votes.keys():
+            self.votes[channel] = {}
+        self.save()
+        return VoteData(channel, self.votes[channel])
+
 
     def __iter__(self):
         return self.players.__iter__()
@@ -35,7 +45,13 @@ class Data:
 
             if 'votes' in data.keys():
                 result.votes = data['votes']
+
+        if result.players is None:
+            result.players = {}
+
+        if result.votes is None:
+            result.votes = {}
         return result
 
 
-players = Data.load()
+database = Data.load()

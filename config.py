@@ -21,5 +21,6 @@ extensions = [
     'cogs.chat',
     'cogs.money',
     'cogs.debug',
-    'cogs.event'
+    'cogs.event',
+    'cogs.vote'
 ]

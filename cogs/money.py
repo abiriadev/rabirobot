@@ -27,7 +27,7 @@ class Money(commands.Cog):
                 await ctx.send(embed=embed)
                 return
 
-        money = db.players[user.id].money
+        money = db.database.Player(user.id).money
         length = len(str(money))
         if length > 32:
             length -= 1
@@ -42,11 +42,8 @@ class Money(commands.Cog):
         await ctx.send(embed=embed)
 
     @money.command(name='주기', aliases=['give'])
-    async def give_money(self, ctx: commands.Context, user: Union[discord.Member, discord.User, int, str, None], amount: Optional[int]):
+    async def give_money(self, ctx: commands.Context, user: Union[discord.Member, discord.User, int, str, None], amount: int):
         userstr = user
-        if amount is None:
-            await send_not_enough_args(ctx, 1, "<유저>", "<수량>")
-            return
 
         if type(user) not in [discord.User, discord.Member]:
             embed = discord.Embed(

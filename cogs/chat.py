@@ -54,15 +54,15 @@ class Chat(commands.Cog):
     @commands.command(name='help', aliases=['도움말', '도움', '도', 'ㄷ', '명령어', '커맨드', 'commands', 'command', 'h'])
     async def help(self, ctx):
         embed = discord.Embed(
-        title="🛠 도움말",
-        description=f"""[명령어 모음]
-        핑 : 봇의 레이턴시를 출력합니다.
-        번역 : googletrans를 이용해 외국어를 한국어로 번역합니다.
-        도움말 : 이 도움말 메세지를 표시합니다.
-        돈 : 보유 중인 라비머니를 표시합니다.
-        """,
-        color=discord.Colour.red()
-        
+            title="🛠 도움말",
+            description=f"""**명령어 모음**
+            핑 : 봇의 레이턴시를 출력합니다.
+            번역 : googletrans를 이용해 외국어를 한국어로 번역합니다.
+            도움말 : 이 도움말 메세지를 표시합니다.
+            돈 : 보유 중인 라비머니를 표시합니다.
+            자세한 도움말은 [__Rabirobot 위키__](https://github.com/KaiNiGHt/rabirobotdocs/wiki)를 확인해주세요.
+            """,
+            color=discord.Colour.red()
         )
         await ctx.send(embed=embed)
 
