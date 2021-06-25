@@ -30,7 +30,7 @@ class Money(commands.Cog):
                 return
 
         money = db.database.Player(user.id).money
-        length = len(str(money))
+        length = len(str(money).replace('-', ''))
         if length > 32:
             length -= 1
             tox = 10 ** length

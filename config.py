@@ -24,7 +24,8 @@ extensions = [
     'cogs.chat',
     'cogs.money',
     'cogs.event',
-    'cogs.vote'
+    'cogs.vote',
+    'cogs.leveling'
 ]
 
 if debug:

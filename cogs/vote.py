@@ -6,7 +6,7 @@ import discord
 from data import db
 from discord.ext import commands
 
-from files.emoji import numbers
+from files.emoji import CustomEmoji
 
 
 class Vote(commands.Cog):
@@ -147,7 +147,7 @@ class Vote(commands.Cog):
 
         n = 1
         for i in vote.fields:
-            await msg.add_reaction(numbers[n])
+            await msg.add_reaction(CustomEmoji.numbers[n])
             n += 1
 
         vote.published = True

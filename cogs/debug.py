@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Union, Optional
 import inspect
 from pprint import pformat
 
@@ -50,8 +50,8 @@ class Debug(commands.Cog):
     async def givemoney(
             self,
             ctx: commands.Context,
-            money: Union[int, None] = None,
-            user: Union[discord.Member, discord.User, int, str, None] = None
+            user: Optional[Union[discord.Member, discord.User, int, str]] = None,
+            money: Union[int, None] = None
     ):
         if user is None:
             user = ctx.author
@@ -67,15 +67,14 @@ class Debug(commands.Cog):
     async def setmoney(
             self,
             ctx: commands.Context,
+            user: Optional[Union[discord.Member, discord.User, int, str]] = None,
             money: Union[int, None] = None,
-            user: Union[discord.Member, discord.User, int, str, None] = None
     ):
         if user is None:
             user = ctx.author
 
         if money is None:
-            if user is None:
-                await ctx.send("설정할 돈을 써")
+            await ctx.send("설정할 돈을 써")
         db.database.Player(user.id).money = money
 
         await ctx.send(f"**{user.name}**에게 {money}로 돈 설정함")
@@ -87,6 +86,19 @@ class Debug(commands.Cog):
             db.database.Player(i).money = 0
         await ctx.send(f"다 돈 0댐 ㅅㄱ")
 
+    @debug.command(name='레벨확인', aliases=['checklevel'])
+    async def checklevel(self, ctx: commands.Context,
+            user: Optional[Union[discord.Member, discord.User, int, str]] = None):
+        if user is None:
+            user = ctx.author
+
+        await ctx.send(f"{user.name} {db.database.Player(user.id).level}렙")
+
+    @debug.command(name='레벨초기화', aliases=['resetlevel'])
+    async def resetmoney(self, ctx: commands.Context):
+        for i in db.database.players.keys():
+            db.database.Player(i).level = 0
+        await ctx.send(f"레벨아 사라져라")
 
     @debug.command(name='eval')
     async def eval_command(self, ctx, *, args: str):
