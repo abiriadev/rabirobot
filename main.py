@@ -17,7 +17,9 @@ class Main(commands.AutoShardedBot):
         for extension in config.extensions:
             self.load_extension(extension)
 
+
 bot = Main()
+
 
 @bot.check
 async def need_verify(ctx: commands.Context):
@@ -32,7 +34,7 @@ async def need_verify(ctx: commands.Context):
         description="`r/인증` 명령어로 인증할 수 있습니다.",
         colour=discord.Colour.red()
     )
-    
+
     await ctx.send(embed=embed)
     return False
 

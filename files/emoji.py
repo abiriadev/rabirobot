@@ -40,7 +40,7 @@ class CustomEmoji:
     extreme_verification = '<:extremeverification:830075036895019008>'
 
     money = '<:rabirocoin:855796110128185344>'
-    levelup = '<:levelup:857901369818480661>'
+    levelup = '<:levelup_new:857954228798750771>'
 
     numbers = ['<:0_:856124552936816670>',
                '<:1_:856122825441280060>',

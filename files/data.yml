@@ -1,30 +1,25 @@
 players:
   536517275667267605:
-    level: 0.33749447416801953
+    level: 0
     money: 0
-    vf_message_channel: 855790087317356554
-    vf_message_id: 857945712298033182
+    vf_message_channel: null
+    vf_message_id: null
   674561377612070936:
-    level: 10.00800929355949
+    level: 0.03349228994579378
+    money: 0
+    vf_message_channel: null
+    vf_message_id: null
+  726952789770633317:
+    level: 0.03349228994579378
     money: 0
     vf_message_channel: 855790087317356554
-    vf_message_id: 857936436916912138
-  726952789770633317:
-    level: 0.4690285150408966
-    money: 1972112119721121
-    vf_message_channel: 855790087317356554
-    vf_message_id: 857946338288336917
-  855615052303958066:
+    vf_message_id: 857987300071964712
+  825244975226421248:
     level: 0
     money: 0
     vf_message_channel: null
     vf_message_id: null
   855652837236670464:
-    level: 0
-    money: 0
-    vf_message_channel: null
-    vf_message_id: null
-  856326505284763650:
     level: 0
     money: 0
     vf_message_channel: null

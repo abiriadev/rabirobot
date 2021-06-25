@@ -1,5 +1,5 @@
 import asyncio
-from datetime import datetime
+from datetime import datetime, tzinfo
 
 import discord
 from discord.ext import commands
@@ -20,7 +20,7 @@ class Verify(commands.Cog):
         player = database.Player(ctx.author.id)
 
         if player.verified:
-            channel = await self.bot.get_channel(player.vf_message_channel)
+            channel = await self.bot.fetch_channel(player.vf_message_channel)
 
             embed = discord.Embed(
                 description=f"이미 약관에 [동의](https://discord.com/channels/{channel.guild.id}/{channel.id}/{player.vf_message_id})했어요.",
@@ -44,11 +44,12 @@ class Verify(commands.Cog):
             while True:
                 await self.bot.wait_for('raw_reaction_add', timeout=60 * 5, check=check)
 
-                player.vf_message_id = ctx.message.id
+                player.vf_message_id = confirm_message.id
                 player.vf_message_channel = ctx.channel.id
 
+                kstnow = datetime.now()
                 now = datetime.utcnow()
-                when_verfy = now.strftime('%H시 %M분 %S초 경')
+                when_verfy = kstnow.strftime('%H시 %M분 %S초 경 (UTC+9)')
 
                 embed = discord.Embed(
                     description=f'{when_verfy} {ctx.author.mention}님이 약관에 동의하셨어요.',

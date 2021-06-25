@@ -23,7 +23,7 @@ class EventHandler(commands.Cog):
         print("ERROR / OUTPUT")
         print("--------------")
 
-        build_channel: discord.TextChannel = self.bot.get_channel(config.build_channel)
+        build_channel: discord.TextChannel = await self.bot.fetch_channel(config.build_channel)
         last_build = await build_channel.history(limit=1, oldest_first=False).flatten()
         last_build: discord.Message = last_build[0]
         if len(last_build.embeds) == 0:
@@ -124,7 +124,7 @@ class EventHandler(commands.Cog):
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload: discord.RawReactionActionEvent):
         reaction: discord.RawReactionActionEvent = payload
-        user: Union[discord.Member, discord.User] = payload.member
+        user: Union[discord.Member, discord.User] = await self.bot.fetch_user(payload.user_id)
         if user == self.bot.user:
             return
 
@@ -134,13 +134,40 @@ class EventHandler(commands.Cog):
             no_two_react.append(vote.messageId)
 
         if reaction.message_id in no_two_react:
-            chn: discord.TextChannel = self.bot.get_channel(reaction.channel_id)
+            chn: discord.TextChannel = await self.bot.fetch_channel(reaction.channel_id)
             msg: discord.Message = await chn.fetch_message(reaction.message_id)
             for r in msg.reactions:
                 if r.emoji == payload.emoji:
                     continue
                 if user in await r.users().flatten():
                     await msg.remove_reaction(r.emoji, user)
+
+    @commands.Cog.listener()
+    async def on_raw_reaction_remove(self, payload: discord.RawReactionActionEvent):
+        reaction: discord.RawReactionActionEvent = payload
+        user: Union[discord.Member, discord.User] = await self.bot.fetch_user(payload.user_id)
+
+        player = db.database.Player(user.id)
+
+        if str(reaction.emoji) == '☑️' and player.vf_message_id == payload.message_id:
+            print("asdf")
+            chn: discord.TextChannel = await self.bot.fetch_channel(reaction.channel_id)
+            msg: discord.Message = await chn.fetch_message(reaction.message_id)
+
+            kstnow = datetime.datetime.now()
+            now = datetime.datetime.utcnow()
+            when_verfy = kstnow.strftime('%H시 %M분 %S초 경 (UTC+9)')
+
+            embed = msg.embeds[0]
+            embed.description += f'\n\n{when_verfy} 약관 동의를 취소하셨어요.'
+            embed.color = discord.Colour.red()
+            embed._timestamp = now
+            player.vf_message_id = None
+            player.vf_message_channel = None
+
+            await msg.edit(embed=embed)
+            await msg.clear_reaction('☑️')
+
 
 
 def setup(bot):
