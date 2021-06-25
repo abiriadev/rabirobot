@@ -60,7 +60,7 @@ class EventHandler(commands.Cog):
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx: commands.Context, error):
-        if ctx.message.content == "r/인증":
+        if ctx.message.content == "r/인증" or not db.database.Player(ctx.author.id).verified:
             return
 
         if isinstance(error, (commands.CommandNotFound)):
