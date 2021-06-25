@@ -11,7 +11,7 @@ bot_owner = [
 ]
 
 debug = True
-version = "0.0.0"
+version = "0.0.1"
 identifier = "dev"
 build_string: str
 build_channel = 857491495305216030
@@ -20,7 +20,9 @@ build: int
 extensions = [
     'cogs.chat',
     'cogs.money',
-    'cogs.debug',
     'cogs.event',
     'cogs.vote'
 ]
+
+if debug:
+    extensions.append('cogs.debug')

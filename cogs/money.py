@@ -52,7 +52,39 @@ class Money(commands.Cog):
             )
             await ctx.send(embed=embed)
             return
-        ...
+
+        give_from = db.database.Player(ctx.author.id)
+        give_to = db.database.Player(user.id)
+
+        if give_from.money < amount:
+            embed = discord.Embed(
+                description=f"🛑 돈이 충분하지 않습니다!",
+                color=discord.Colour.red()
+            )
+            await ctx.send(embed=embed)
+            return
+
+        if amount < 0:
+            give_from.money += amount
+            embed = discord.Embed(
+                description=f"산신령 <- {amount * -1}{CustomEmoji.money} <- {ctx.author.mention}",
+                color=discord.Colour.red()
+            )
+            embed.set_footer(text="산신령이 꼼수를 쓰려는 너에게서 돈을 뺏어갔습니다!")
+            await ctx.send(embed=embed)
+            return
+
+
+        give_from.money -= amount
+        give_to.money += amount
+
+        embed = discord.Embed(
+            description=f"{ctx.author.mention} -> {amount}{CustomEmoji.money} -> {user.mention}",
+            color=discord.Colour.blurple()
+        )
+        await ctx.send(embed=embed)
+
+
 
 
 def setup(bot):

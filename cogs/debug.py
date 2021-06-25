@@ -75,11 +75,19 @@ class Debug(commands.Cog):
             user = ctx.author
 
         if money is None:
-            await ctx.send("설정할 돈을 써")
-
+            if user is None:
+                await ctx.send("설정할 돈을 써")
         db.database.Player(user.id).money = money
 
-        await ctx.send(f"**{user.name}**에게 {money}만큼 돈 줌")
+        await ctx.send(f"**{user.name}**에게 {money}로 돈 설정함")
+
+
+    @debug.command(name='돈초기화', aliases=['resetmoney'])
+    async def resetmoney(self, ctx: commands.Context):
+        for i in db.database.players.keys():
+            db.database.Player(i).money = 0
+        await ctx.send(f"다 돈 0댐 ㅅㄱ")
+
 
     @debug.command(name='eval')
     async def eval_command(self, ctx, *, args: str):

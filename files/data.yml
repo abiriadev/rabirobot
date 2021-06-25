@@ -1,2 +1,14 @@
-players: {}
+players:
+  674561377612070936:
+    level: 0
+    money: null
+  726952789770633317:
+    level: 0
+    money: 0
+  768277889757347860:
+    level: 0
+    money: 0
+  825244975226421248:
+    level: 0
+    money: -5000000
 votes: {}
