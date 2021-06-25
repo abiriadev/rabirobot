@@ -1,8 +1,10 @@
 from typing import *
 
-from database import db
+import discord
+from discord.ext import commands
+
+from data import db
 from files.emoji import CustomEmoji
-from files.utils import *
 
 
 class Money(commands.Cog):

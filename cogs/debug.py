@@ -5,8 +5,7 @@ from pprint import pformat
 import discord
 from discord.ext import commands
 
-from database import db
-from files import utils
+from data import db
 import config
 
 

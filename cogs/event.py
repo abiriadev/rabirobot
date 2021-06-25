@@ -7,8 +7,9 @@ import discord
 from discord.ext import commands
 
 import config
-from database import db
-from database.vote import VoteData
+import coroutines
+from data import db
+from data.vote import VoteData
 
 
 class EventHandler(commands.Cog):
@@ -42,11 +43,12 @@ class EventHandler(commands.Cog):
             print("")
         config.build_string = f"{config.identifier.title()} Build {config.build}" if config.debug else f"{config.version}-{config.identifier}.{config.build}"
 
-        build_embed = discord.Embed(title=config.build_string, color=discord.Color.from_rgb(random.randrange(0, 255), random.randrange(0, 255), random.randrange(0, 255)))
+        build_embed = discord.Embed(title=config.build_string, color=discord.Color.random())
         build_embed._timestamp = datetime.datetime.utcnow()
 
-        await build_channel.send(embed=build_embed)
+        await coroutines.refresh_verification(self.bot)
 
+        await build_channel.send(embed=build_embed)
 
         # TODO 정식 출시 시 이 내용 수정
         activity = discord.Activity(name='🐛 버그 잡는 모습', type=discord.ActivityType.watching)
@@ -57,7 +59,10 @@ class EventHandler(commands.Cog):
         )
 
     @commands.Cog.listener()
-    async def on_command_error(self, ctx, error):
+    async def on_command_error(self, ctx: commands.Context, error):
+        if ctx.message.content == "r/인증":
+            return
+
         if isinstance(error, (commands.CommandNotFound)):
             error_desctiption = '명령어를 찾을 수 없어요.'
 
@@ -67,7 +72,7 @@ class EventHandler(commands.Cog):
 
         elif isinstance(error, commands.BadArgument):
             error_desctiption = '입력된 인자에 문제가 생겼거나 인식할 수 없어요.'
-            
+
         elif isinstance(error, commands.UserInputError):
             error_desctiption = '명령어를 잘못 사용했어요.'
 
@@ -86,24 +91,26 @@ class EventHandler(commands.Cog):
 
         elif isinstance(error.original, discord.Forbidden):
             error_desctiption = '봇에게 명령어 실행에 필요한 권한이 없없어요.'
-    
+
         # else - bot
         elif isinstance(error, commands.DisabledCommand):
             error_desctiption = '해당 명령어가 알 수 없는 이유로 비활성화 돼 있어요.'
-            
+
         elif isinstance(error, commands.CommandOnCooldown):
             error_desctiption = f'아직 그 명령어는 쿨타임 중에 있어요. {int(error.retry_after)}초 후에 다시 시도해주세요.'
-        
+
         elif isinstance(error, commands.ExtensionError):
             error_desctiption = '봇의 Extension과 관련한 오류가 발생했어요. 봇 개발자에게 문의해 주세요.'
-            
+
         # code, system
-        elif isinstance(error.original, (IndexError, KeyError, NameError, OSError, SyntaxError, TabError, SystemError, TypeError, UnicodeError, ValueError, AttributeError)):
+        elif isinstance(error.original, (
+        IndexError, KeyError, NameError, OSError, SyntaxError, TabError, SystemError, TypeError, UnicodeError,
+        ValueError, AttributeError)):
             error_desctiption = '문법적인 오류가 발생했어요.'
-            
+
         else:
             error_desctiption = '예기치 못한 오류가 발생했어요.'
-            
+
         embed = discord.Embed(
             title=f'🛑 {error_desctiption}',
             color=0xF03A17
@@ -133,6 +140,7 @@ class EventHandler(commands.Cog):
                     continue
                 if user in await r.users().flatten():
                     await msg.remove_reaction(r.emoji, user)
+
 
 def setup(bot):
     bot.add_cog(EventHandler(bot))

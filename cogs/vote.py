@@ -1,10 +1,9 @@
 import random
 from typing import Union, Optional
 
-from files import utils
 import discord
 
-from database import db
+from data import db
 from discord.ext import commands
 
 from files.emoji import numbers

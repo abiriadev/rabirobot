@@ -1,5 +1,4 @@
 import discord
-from files.emoji import numbers
 
 class VoteData:
     _selfDict: dict

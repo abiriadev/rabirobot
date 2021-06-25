@@ -2,13 +2,29 @@ players:
   674561377612070936:
     level: 0
     money: null
+    vf_message_channel: 855790087317356554
+    vf_message_id: 857895675194638357
   726952789770633317:
     level: 0
     money: 0
+    vf_message_channel: 855790087317356554
+    vf_message_id: 857890409233514526
   768277889757347860:
     level: 0
     money: 0
+    vf_message_channel: null
+    vf_message_id: null
   825244975226421248:
     level: 0
     money: -5000000
-votes: {}
+    vf_message_channel: null
+    vf_message_id: null
+votes:
+  855790087317356554:
+    description: ''
+    fields:
+    - "\uC0CC\uC988"
+    - "\uD30C\uD53C\uB8E8\uC2A4"
+    messageId: 857890833692885005
+    published: true
+    title: "\uC81C\uBAA9 \uC5C6\uB294 \uD22C\uD45C"

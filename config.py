@@ -1,3 +1,5 @@
+from discord.ext import commands
+
 bot_token = 'ODU1NjUyODM3MjM2NjcwNDY0.YM1mzQ.2fiCLc8Tlc23ps-IrQ4NVQArCnc'
 bot_prefix = 'r/'
 bot_owner = [
@@ -18,6 +20,7 @@ build_channel = 857491495305216030
 build: int
 
 extensions = [
+    'cogs.verify',
     'cogs.chat',
     'cogs.money',
     'cogs.event',

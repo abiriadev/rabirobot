@@ -1,7 +1,7 @@
 import yaml
 
-from database.player import PlayerData
-from database.vote import VoteData
+from data.player import PlayerData
+from data.vote import VoteData
 
 
 class Data:
