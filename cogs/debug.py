@@ -50,7 +50,7 @@ class Debug(commands.Cog):
     async def givemoney(
             self,
             ctx: commands.Context,
-            user: Optional[Union[discord.Member, discord.User, int, str]] = None,
+            user: Optional[Union[discord.Member, discord.User]] = None,
             money: Union[int, None] = None
     ):
         if user is None:
@@ -67,7 +67,7 @@ class Debug(commands.Cog):
     async def setmoney(
             self,
             ctx: commands.Context,
-            user: Optional[Union[discord.Member, discord.User, int, str]] = None,
+            user: Optional[Union[discord.Member, discord.User]] = None,
             money: Union[int, None] = None,
     ):
         if user is None:
@@ -104,7 +104,7 @@ class Debug(commands.Cog):
 
     @debug.command(name='레벨확인', aliases=['checklevel'])
     async def checklevel(self, ctx: commands.Context,
-            user: Optional[Union[discord.Member, discord.User, int, str]] = None):
+            user: Optional[Union[discord.Member, discord.User]] = None):
         if user is None:
             user = ctx.author
 
