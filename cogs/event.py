@@ -63,9 +63,10 @@ class EventHandler(commands.Cog):
         if ctx.message.content == "r/인증" or not db.database.Player(ctx.author.id).verified:
             return
 
+        # IGNORE EXCEPTIONS
         if isinstance(error, (commands.CommandNotFound)):
-            error_desctiption = '명령어를 찾을 수 없어요.'
-
+            return
+            
         # User Input Error
         elif isinstance(error, commands.MissingRequiredArgument):
             error_desctiption = '명령어를 구성하는 필수 인자가 누락되었어요. 명령어를 제대로 사용했는지 확인해 주세요.'
