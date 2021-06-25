@@ -45,7 +45,7 @@ class Verify(commands.Cog):
             else:
                 embed = discord.Embed(
                     title="Rabirobot 이용약관",
-                    description="아직 아무것도 없는 것 같아 보이네요 :(\n`r/인증`을 한번 더 입력하면 약관에 동의한 것으로 간주됩니다.",
+                    description="[**약관 확인**](https://www.notion.so/Rabirobot-30121c825ed34e6591698f51f6312b35)\n\n`r/인증`을 한번 더 입력하면 약관에 동의한 것으로 간주됩니다.",
                     colour=discord.Colour.gold()
                 )
                 embed._timestamp = datetime.datetime.utcnow()

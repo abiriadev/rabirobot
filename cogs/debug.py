@@ -79,6 +79,22 @@ class Debug(commands.Cog):
 
         await ctx.send(f"**{user.name}**에게 {money}로 돈 설정함")
 
+    @debug.command(name='레벨설정', aliases=['setlevel'])
+    async def setlevel(
+            self,
+            ctx: commands.Context,
+            user: Optional[Union[discord.Member, discord.User]] = None,
+            level: Union[int, None] = None,
+    ):
+        if user is None:
+            user = ctx.author
+
+        if level is None:
+            await ctx.send("얼마나?")
+        db.database.Player(user.id).level = level
+
+        await ctx.send(f"**{user.name}** 이제 {level}레벨!")
+
 
     @debug.command(name='돈초기화', aliases=['resetmoney'])
     async def resetmoney(self, ctx: commands.Context):
