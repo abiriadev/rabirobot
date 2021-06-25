@@ -75,8 +75,14 @@ class Money(commands.Cog):
             embed.set_footer(text="산신령이 꼼수를 쓰려는 너에게서 돈을 뺏어갔습니다!")
             await ctx.send(embed=embed)
             return
-
-
+        if amount == 19721121:
+            embed = discord.Embed(
+                description=f"{ctx.author.mention} -> orange bottle -> 김두한",
+                color=discord.Colour.orange()
+            )
+            embed.set_footer(text="1972년 11월 21일, 김두한은 오렌지병이었던 돈으로 인해 폭★8한다!")
+            await ctx.send(embed=embed)
+            return
         give_from.money -= amount
         give_to.money += amount
 
@@ -85,7 +91,9 @@ class Money(commands.Cog):
             color=discord.Colour.blurple()
         )
         await ctx.send(embed=embed)
-
+        @money.command(name="help", aliases=['도움말', '도움', '도', 'ㄷ', '명령어', '커맨드', 'commands', 'command', 'h'])
+        async def help(self, ctx):
+            await ctx.send("임시로적어놓은아무말안녕하세요카이나이트입니다도움말곧추가됩니다 ㄱㄷ")
 
 
 
