@@ -32,7 +32,6 @@ class Leveling(commands.Cog):
         )
         totalexp = calc_level(level)
         embed.set_footer(text=f"다음 레벨 업 까지: {math.floor((lexp % 1) * totalexp)} / {math.ceil(totalexp)} 채팅")
-        print(level)
         await ctx.send(embed=embed)
 
 
@@ -40,15 +39,18 @@ class Leveling(commands.Cog):
     async def on_message(self, message: discord.Message):
         if not db.database.Player(message.author.id).verified:
             return
+
         if message.content.startswith("r/"):
             return
+
         player = db.database.Player(message.author.id)
         prev_level = player.level
         level = math.floor(prev_level)
         new_level = player.level + 1 / calc_level(level)
+
         if math.floor(new_level) > math.floor(prev_level):
-            print(new_level)
             await message.add_reaction(emoji=CustomEmoji.levelup)
+
         player.level = new_level
 
 def setup(bot):

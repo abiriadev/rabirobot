@@ -15,14 +15,12 @@ class Main(commands.AutoShardedBot):
         )
 
         for extension in config.extensions:
-            print(extension)
             self.load_extension(extension)
 
 bot = Main()
 
 @bot.check
 async def need_verify(ctx: commands.Context):
-    print(ctx.message.content)
     if db.database.Player(ctx.author.id).verified:
         return True
 

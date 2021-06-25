@@ -40,7 +40,7 @@ class EventHandler(commands.Cog):
             print("BUILD      |", config.identifier, config.build)
             print("VERSION    |", config.version)
             print("DEBUG MODE |", config.debug)
-            print("")
+            print()
         config.build_string = f"{config.identifier.title()} Build {config.build}" if config.debug else f"{config.version}-{config.identifier}.{config.build}"
 
         build_embed = discord.Embed(title=config.build_string, color=discord.Color.random())

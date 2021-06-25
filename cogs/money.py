@@ -16,7 +16,7 @@ class Money(commands.Cog):
         ...
 
     @money.command(name='보기', aliases=['show'])
-    async def show_money(self, ctx: commands.Context, user: Union[discord.Member, discord.User, int, str, None] = None):
+    async def show_money(self, ctx: commands.Context, user: Union[discord.Member, discord.User, None] = None):
         userstr = user
         if user is None:
             user = ctx.author
@@ -40,11 +40,11 @@ class Money(commands.Cog):
             description=f"{user.mention}님의 라비머니는 현재 **{money}**{CustomEmoji.money} 입니다.",
             color=discord.Colour.blurple()
         )
-        print(money)
+
         await ctx.send(embed=embed)
 
     @money.command(name='주기', aliases=['give'])
-    async def give_money(self, ctx: commands.Context, user: Union[discord.Member, discord.User, int, str, None], amount: int):
+    async def give_money(self, ctx: commands.Context, user: Union[discord.Member, discord.User, None], amount: int):
         userstr = user
 
         if type(user) not in [discord.User, discord.Member]:
