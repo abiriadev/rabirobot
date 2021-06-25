@@ -1,9 +1,2 @@
 players: {}
-votes:
-  855790087317356554:
-    additionalMessages: []
-    description: "\uC544 \uD0B9\uBC1B\uC544"
-    fields: []
-    messageId: null
-    published: false
-    title: "\uC544 \uC2A4\uD2B8\uB808\uC2A4"
+votes: {}

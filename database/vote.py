@@ -25,10 +25,6 @@ class VoteData:
         return self._selfDict["messageId"]
 
     @property
-    def additionalMessages(self):
-        return self._selfDict["additionalMessages"]
-
-    @property
     def embed(self):
         result = discord.Embed(title=self.title, description=self.description)
         fields: dict = self.fields
@@ -66,10 +62,6 @@ class VoteData:
     def messageId(self, mid: int):
         self._selfDict["messageId"] = mid
 
-    @additionalMessages.setter
-    def additionalMessages(self, msgs: list[int]):
-        self._selfDict["additionalMessages"] = msgs
-
     def __init__(self, id: int, selfDict: dict):
         self._id = id
         self._selfDict = selfDict
@@ -87,6 +79,3 @@ class VoteData:
 
         if "messageId" not in self._selfDict:
             self._selfDict["messageId"] = None
-
-        if "additionalMessages" not in self._selfDict:
-            self._selfDict["additionalMessages"] = []
