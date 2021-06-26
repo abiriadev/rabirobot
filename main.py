@@ -38,5 +38,18 @@ async def need_verify(ctx: commands.Context):
     await ctx.send(embed=embed)
     return False
 
+bad = ["시발", "병신"] # 이 안에 욕설들 들어감. 나중에 많아지면 파일 분할하는게 좋을듯.
+@bot.event
+async def on_message(message):
+    message_contant=message.content 
+    for i in bad: 
+        if i in message_contant: 
+            embed = discord.Embed(
+                description=f"{message.author.mention}님이 욕설을 사용했습니다!",
+                color=discord.Colour.red()
+            )
+            embed.set_footer(text=i[0] + '*' * (len(i) - 1) + ' 욕설이 검거되었습니다!')
+            await message.channel.send(embed) 
+            await message.delete()
 
 bot.run(config.bot_token)
