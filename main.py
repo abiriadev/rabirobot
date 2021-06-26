@@ -49,7 +49,9 @@ async def on_message(message):
                 color=discord.Colour.red()
             )
             embed.set_footer(text=i[0] + '*' * (len(i) - 1) + ' 욕설이 검거되었습니다!')
-            await message.channel.send(embed) 
+            await message.channel.send(embed=embed)
             await message.delete()
+
+    await bot.process_commands(message)
 
 bot.run(config.bot_token)
