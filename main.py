@@ -38,7 +38,7 @@ async def need_verify(ctx: commands.Context):
     await ctx.send(embed=embed)
     return False
 
-bad = ["시발", "병신"] # 이 안에 욕설들 들어감. 나중에 많아지면 파일 분할하는게 좋을듯.
+bad = config.yorks # 이 안에 욕설들 들어감. 나중에 많아지면 파일 분할하는게 좋을듯.
 @bot.event
 async def on_message(message):
     message_content = message.content 

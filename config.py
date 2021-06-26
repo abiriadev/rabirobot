@@ -27,6 +27,12 @@ extensions = [
     'cogs.vote',
     'cogs.leveling'
 ]
-
+yorks = []
+yorksfile = open("./yorks.txt", encoding="UTF8")
+while True:
+    line = yorksfile.readline()
+    if not line: break
+    yorks.append(line)
+yorksfile.close()
 if debug:
     extensions.append('cogs.debug')

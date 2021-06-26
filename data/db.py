@@ -2,7 +2,11 @@ import yaml
 
 from data.player import PlayerData
 from data.vote import VoteData
-
+# import pickle
+# with open('yorks.bin', 'rb') as f:
+#     dd = pickle.load(f)
+# with open('yorks.txt', 'w') as f:
+#     f.write('\n'.join(dd))
 
 class Data:
     players: dict
