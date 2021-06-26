@@ -46,9 +46,9 @@ class EventHandler(commands.Cog):
         build_embed = discord.Embed(title=config.build_string, color=discord.Color.random())
         build_embed._timestamp = datetime.datetime.utcnow()
 
-        await coroutines.refresh_verification(self.bot)
-
         await build_channel.send(embed=build_embed)
+
+        await coroutines.refresh_verification(self.bot)
 
         # TODO 정식 출시 시 이 내용 수정
         activity = discord.Activity(name='🐛 버그 잡는 모습', type=discord.ActivityType.watching)
