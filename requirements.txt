@@ -1,0 +1,7 @@
+asyncio
+discord
+discord.py
+pyyaml
+typing
+datetime
+googletrans==4.0.0-rc1
