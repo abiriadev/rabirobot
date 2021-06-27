@@ -25,9 +25,18 @@ class Leveling(commands.Cog):
         ...
 
     @level.command(name="확인", aliases=["check"])
-    async def check_level(self, ctx):
-        user = ctx.author
-
+    async def check_level(self, ctx, user: Union[discord.Member, discord.User, None] = None):
+        userstr = user
+        if user == None:
+            user = ctx.author
+        else:
+            if type(user) not in [discord.User, discord.Member]:
+                embed = discord.Embed(
+                    description=f"🛑 **{userstr}** 유저를 찾을 수 없습니다.",
+                    color=discord.Colour.red()
+                )
+                await ctx.send(embed=embed)
+                return
         lexp = db.database.Player(user.id).level
         level: float = math.floor(lexp)
         length = len(str(level).replace('-', ''))
