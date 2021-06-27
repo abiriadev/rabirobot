@@ -1,7 +1,3 @@
-asyncio
-discord
-discord.py
 pyyaml
-typing
-datetime
+discord.py
 googletrans==4.0.0-rc1
