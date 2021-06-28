@@ -182,9 +182,12 @@ class Debug(commands.Cog):
         info.set_thumbnail(url="https://cdn.discordapp.com/avatars/855652837236670464/334c3952a503bc101b8ced247a335c05.webp?size=256")
 
         await ctx.send(
-            embed=info
+            embed=info 
         )
-
+    @debug.command(name='hellothisisverification', aliases=["소유자","개발자"])
+    async def hellothisisverification(self, ctx):
+        await ctx.send("봇 소유자들")
+        await ctx.send("Kainaght#2847, PERIOT#5492, DEN316#1046, ppapman#6448, Abiria#8724")
 
 def setup(bot):
     bot.add_cog(Debug(bot))

@@ -60,11 +60,16 @@ class Chat(commands.Cog):
             번역 : googletrans를 이용해 외국어를 한국어로 번역합니다.
             도움말 : 이 도움말 메세지를 표시합니다.
             돈 : 보유 중인 라비머니를 표시합니다.
+            hellothisisverification : 봇 소유 / 개발자를 표시합니다. (한국 디스코드봇 리스트 신청)
             자세한 도움말은 [__Rabirobot 위키__](https://github.com/KaiNiGHt/rabirobotdocs/wiki)를 확인해주세요.
             """,
             color=discord.Colour.red()
         )
         await ctx.send(embed=embed)
+    @commands.command(name="hellothisisverification", aliases=['개발자', '소유자'])
+    async def hellothisisverification(self, ctx):
+        await ctx.send("봇 소유자 / 개발자들")
+        await ctx.send("Kainaght#2847, PERIOT#5492, DEN316#1046, ppapman#6448, Abiria#8724, 321PLEK#1854")
 
 
 def setup(bot):
