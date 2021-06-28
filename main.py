@@ -38,12 +38,15 @@ async def need_verify(ctx: commands.Context):
     await ctx.send(embed=embed)
     return False
 
-bad = config.yorks # 이 안에 욕설들 들어감. 나중에 많아지면 파일 분할하는게 좋을듯.
+
+bad = config.curses  # 이 안에 욕설들 들어감. 나중에 많아지면 파일 분할하는게 좋을듯.
+
+
 @bot.event
 async def on_message(message):
-    message_content = message.content 
-    for i in bad: 
-        if i in message_content: 
+    message_content = message.content
+    for i in bad:
+        if i in message_content:
             embed = discord.Embed(
                 description=f"{message.author.mention}님이 욕설을 사용했습니다!",
                 color=discord.Colour.red()
@@ -53,5 +56,6 @@ async def on_message(message):
             await message.delete()
 
     await bot.process_commands(message)
+
 
 bot.run(config.bot_token)

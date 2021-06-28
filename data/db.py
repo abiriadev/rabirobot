@@ -2,11 +2,7 @@ import yaml
 
 from data.player import PlayerData
 from data.vote import VoteData
-# import pickle
-# with open('yorks.bin', 'rb') as f:
-#     dd = pickle.load(f)
-# with open('yorks.txt', 'w') as f:
-#     f.write('\n'.join(dd))
+
 
 class Data:
     players: dict
@@ -31,7 +27,6 @@ class Data:
             self.votes[channel] = {}
         self.save()
         return VoteData(channel, self.votes[channel])
-
 
     def __iter__(self):
         return self.players.__iter__()

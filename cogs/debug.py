@@ -26,13 +26,13 @@ class Debug(commands.Cog):
     async def db_help(self, ctx):
         embed = discord.Embed(
             title="🛠 도움말",
-            description=f"""[디버그 : 명령어 모음]
-            저장   : 변경된 정보를 저장함.
-            돈주기 : 입력한 수만큼 선택 유저에게 돈을 지급(-도 가능.)
-            도움말 : 이 도움말 메세지를 표시함.
-            돈설정 : 선택한 유저의 돈의 데이터를 덮어씌움.
-            eval  : 파이썬의 eval 함수를 실행시킴.
-            info  : 봇 정보를 출력함
+            description=f"""[디버그: 명령어 모음]
+            저장  : 변경된 정보를 저장함.
+            돈주기: 입력한 수만큼 선택 유저에게 돈을 지급(-도 가능.)
+            도움말: 이 도움말 메세지를 표시함.
+            돈설정: 선택한 유저의 돈의 데이터를 덮어씌움.
+            eval : 파이썬의 eval 함수를 실행시킴.
+            info : 봇 정보를 출력함
             """,
             color=discord.Colour.red()
         )

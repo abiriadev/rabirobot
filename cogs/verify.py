@@ -32,7 +32,8 @@ class Verify(commands.Cog):
 
         embed = discord.Embed(
             title="Rabirobot 이용하기",
-            description="Rabirobot을 이용하기 위해서 [서비스 이용 약관](https://www.notion.so/Rabirobot-30121c825ed34e6591698f51f6312b35)을 동의하셔야 해요.\n아래 이모지를 눌러 동의할 수 있어요.",
+            description="""Rabirobot을 이용하기 위해서 [서비스 이용 약관](https://www.notion.so/Rabirobot-30121c825ed34e6591698f51f6312b35)을 동의하셔야 해요.
+            아래 이모지를 눌러 동의할 수 있어요.""",
             colour=discord.Colour.gold()
         )
         embed._timestamp = datetime.utcnow()
