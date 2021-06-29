@@ -12,7 +12,7 @@ class Chat(commands.Cog):
     async def ping(self, ctx):
         embed = discord.Embed(
             title="🏓 퐁!",
-            description=f"봇의 레이턴시 : {round(self.bot.latency * 1000)}ms",
+            description=f"봇의 레이턴시: {round(self.bot.latency * 1000)}ms",
             color=discord.Colour.red()
         )
 
@@ -56,11 +56,10 @@ class Chat(commands.Cog):
         embed = discord.Embed(
             title="🛠 도움말",
             description=f"""**명령어 모음**
-            핑 : 봇의 레이턴시를 출력합니다.
-            번역 : googletrans를 이용해 외국어를 한국어로 번역합니다.
-            도움말 : 이 도움말 메세지를 표시합니다.
-            돈 : 보유 중인 라비머니를 표시합니다.
-            hellothisisverification : 봇 소유 / 개발자를 표시합니다. (한국 디스코드봇 리스트 신청)
+            핑: 봇의 레이턴시를 출력합니다.
+            번역: googletrans를 이용해 외국어를 한국어로 번역합니다.
+            도움말: 이 도움말 메세지를 표시합니다.
+            돈: 보유 중인 라비머니를 표시합니다.
             자세한 도움말은 [__Rabirobot 위키__](https://github.com/KaiNiGHt/rabirobotdocs/wiki)를 확인해주세요.
             """,
             color=discord.Colour.red()

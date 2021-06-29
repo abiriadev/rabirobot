@@ -27,12 +27,12 @@ extensions = [
     'cogs.vote',
     'cogs.leveling'
 ]
-yorks = []
-yorksfile = open("./yorks.txt", encoding="UTF8")
+curses = []
+cursefile = open("./curses.txt", encoding="UTF8")
 while True:
-    line = yorksfile.readline()
+    line = cursefile.readline()
     if not line: break
-    yorks.append(line)
-yorksfile.close()
+    curses.append(line)
+cursefile.close()
 if debug:
     extensions.append('cogs.debug')
