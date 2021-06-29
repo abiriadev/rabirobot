@@ -53,7 +53,8 @@ async def on_message(message):
             )
             embed.set_footer(text=i[0] + '*' * (len(i) - 1) + ' 욕설이 검거되었습니다!')
             await message.channel.send(embed=embed)
-            await message.delete()
+            await message.delete() #BUG 403 Forbidden 50001 오류 
+            #한국 디스코드봇 리스트 서버 등 봇에게 권한이 없을 경우 403 오류가 남. 이곳 말고도 오류가 나는 곳은 많을것으로 추정됨. 보기 좀 그러니까 고칩시다.
 
     await bot.process_commands(message)
 

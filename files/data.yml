@@ -4,6 +4,11 @@ players:
     money: 0
     vf_message_channel: null
     vf_message_id: null
+  236696896658341888:
+    level: 0
+    money: 0
+    vf_message_channel: null
+    vf_message_id: null
   288302173912170497:
     level: 0.03349228994579378
     money: 0
@@ -14,11 +19,21 @@ players:
     money: 0
     vf_message_channel: null
     vf_message_id: null
+  415135882006495242:
+    level: 0.1674614497289689
+    money: 19720000
+    vf_message_channel: 705218576021192726
+    vf_message_id: 859307098512687134
   439421870857519104:
     level: 0.03349228994579378
     money: 8888
     vf_message_channel: 855622375268941825
     vf_message_id: 858711972790927390
+  495209098929766400:
+    level: 0
+    money: 0
+    vf_message_channel: null
+    vf_message_id: null
   532239959281893397:
     level: 0
     money: 0
@@ -54,16 +69,51 @@ players:
     money: 0
     vf_message_channel: 855790087317356554
     vf_message_id: 858276484560977925
+  704999866094452816:
+    level: 0
+    money: 0
+    vf_message_channel: null
+    vf_message_id: null
+  708629911547543572:
+    level: 0
+    money: 0
+    vf_message_channel: null
+    vf_message_id: null
+  708704657920491592:
+    level: 0
+    money: 0
+    vf_message_channel: null
+    vf_message_id: null
+  712157945223184484:
+    level: 0
+    money: 0
+    vf_message_channel: null
+    vf_message_id: null
   726952789770633317:
-    level: 1.9680143317114815
-    money: 19710261
+    level: 2.265215347788548
+    money: 10
     vf_message_channel: 855790087317356554
     vf_message_id: 857987300071964712
+  751339721782722570:
+    level: 0
+    money: 0
+    vf_message_channel: null
+    vf_message_id: null
+  764128303195488287:
+    level: 0
+    money: 0
+    vf_message_channel: null
+    vf_message_id: null
   768277889757347860:
     level: 0.03349228994579378
     money: 0
     vf_message_channel: 855790087317356554
     vf_message_id: 859097597679370272
+  774106272131055626:
+    level: 0
+    money: 0
+    vf_message_channel: null
+    vf_message_id: null
   784014826065100800:
     level: 0
     money: 0
@@ -75,6 +125,16 @@ players:
     vf_message_channel: null
     vf_message_id: null
   813340050737725502:
+    level: 0
+    money: 0
+    vf_message_channel: null
+    vf_message_id: null
+  813971133212524545:
+    level: 0
+    money: 0
+    vf_message_channel: null
+    vf_message_id: null
+  821122182246826056:
     level: 0
     money: 0
     vf_message_channel: null
@@ -104,7 +164,17 @@ players:
     money: 0
     vf_message_channel: null
     vf_message_id: null
+  851078479167356938:
+    level: 0
+    money: 0
+    vf_message_channel: null
+    vf_message_id: null
   853124679614464010:
+    level: 0
+    money: 0
+    vf_message_channel: null
+    vf_message_id: null
+  855428369915183124:
     level: 0
     money: 0
     vf_message_channel: null
@@ -129,9 +199,22 @@ players:
     money: 0
     vf_message_channel: null
     vf_message_id: null
+  856935856617816124:
+    level: 0
+    money: 0
+    vf_message_channel: null
+    vf_message_id: null
   857123869467213834:
     level: 0
     money: 0
     vf_message_channel: null
     vf_message_id: null
-votes: {}
+votes:
+  705218576021192726:
+    description: ''
+    fields:
+    - a
+    - b
+    messageId: 859306742965600306
+    published: true
+    title: "\uC81C\uBAA9 \uC5C6\uB294 \uD22C\uD45C"

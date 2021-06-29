@@ -91,7 +91,7 @@ class EventHandler(commands.Cog):
             error_desctiption = '당신은 이 명령어를 실행할 수 있는 권한이 없어요.'
 
         elif isinstance(error.original, discord.Forbidden):
-            error_desctiption = '봇에게 명령어 실행에 필요한 권한이 없없어요.'
+            error_desctiption = '봇에게 명령어 실행에 필요한 권한이 없어요. 해당 명령어를 제대로 사용하기 위한 권한이 봇에게 부여되어 있는지 확인해 주세요.'
 
         # else - bot
         elif isinstance(error, commands.DisabledCommand):

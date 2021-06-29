@@ -20,7 +20,7 @@ class Vote(commands.Cog):
 
     @vote.command(name='만들기', aliases=['create', 'new', '제작'])
     async def create_vote(self, ctx: commands.Context, channel: Union[discord.TextChannel, None], title='제목 없는 투표',
-                          desc=''):
+                            desc=''):
         if channel is None:
             channel = ctx.channel
         if title is None:
