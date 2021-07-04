@@ -10,6 +10,8 @@ import config
 import sys
 import os
 import platform
+
+
 # from psutil import _psutil_windows
 # import psutil
 # mem = psutil.virtual_memory()
@@ -31,13 +33,13 @@ class Debug(commands.Cog):
         embed = discord.Embed(
             title="🛠 도움말",
             description=f"""[디버그: 명령어 모음]
-            저장  : 변경된 정보를 저장함.
-            돈주기: 입력한 수만큼 선택 유저에게 돈을 지급(-도 가능.)
-            도움말: 이 도움말 메세지를 표시함.
-            돈설정: 선택한 유저의 돈의 데이터를 덮어씌움.
-            eval : 파이썬의 eval 함수를 실행시킴.
-            info : 봇 정보를 출력함.
-            """,
+저장 : 변경된 정보를 저장함.
+돈주기: 입력한 수만큼 선택 유저에게 돈을 지급(-도 가능.)
+도움말: 이 도움말 메세지를 표시함.
+돈설정: 선택한 유저의 돈의 데이터를 덮어씌움.
+eval: 파이썬의 eval 함수를 실행시킴.
+info: 봇 정보를 출력함.
+""",
             color=discord.Colour.red()
         )
 
@@ -99,7 +101,6 @@ class Debug(commands.Cog):
 
         await ctx.send(f"**{user.name}** 이제 {level}레벨!")
 
-
     @debug.command(name='돈초기화', aliases=['resetmoney'])
     async def resetmoney(self, ctx: commands.Context):
         for i in db.database.players.keys():
@@ -108,7 +109,7 @@ class Debug(commands.Cog):
 
     @debug.command(name='레벨확인', aliases=['checklevel'])
     async def checklevel(self, ctx: commands.Context,
-            user: Optional[Union[discord.Member, discord.User]] = None):
+                         user: Optional[Union[discord.Member, discord.User]] = None):
         if user is None:
             user = ctx.author
 
@@ -129,8 +130,7 @@ class Debug(commands.Cog):
         else:
             output = res
 
-        if not (
-                'token' in args.lower() or
+        if not ('token' in args.lower() or
                 'secret' in args.lower() or
                 'config' in args.lower() or
                 config.bot_token in str(output)
@@ -144,76 +144,65 @@ class Debug(commands.Cog):
             embed.add_field(name='📤 아웃풋', value=f'```py\n{pformat(output)}```')
             embed.add_field(name='🔍 타입', value=f'```py\n{type(output)}```')
 
-        elif (
-                'eval' in args.lower() or
-                'exec' in args.lower()
-        ):
-            embed = discord.Embed(
-                title='🛑 제한됨',
-                description='eval이나 exec 등은 사용할 수 없습니다.',
-                color=discord.Colour.red()
-            )
+        elif 'eval' in args.lower() or 'exec' in args.lower():
+            embed = discord.Embed(title='🛑 제한됨',
+                                  description='eval이나 exec 등은 사용할 수 없습니다.',
+                                  color=discord.Colour.red()
+                                  )
 
         else:
-            embed = discord.Embed(
-                title='🛑 제한됨',
-                description='민감한 정보는 전송할 수 없습니다.',
-                color=discord.Colour.red()
-            )
+            embed = discord.Embed(title='🛑 제한됨',
+                                  description='민감한 정보는 전송할 수 없습니다.',
+                                  color=discord.Colour.red()
+                                  )
 
         await ctx.send(embed=embed)
 
     @debug.command(name="version", aliases=['ver', 'info', '버전', '정보'])
     async def botversion(self, ctx):
-        info = discord.Embed(
-                title='Bot info',
-                description="",
-                color=discord.Colour.green()
-            )
+        info = discord.Embed(title='Bot info',
+                             description="",
+                             color=discord.Colour.green()
+                             )
 
         info.add_field(name="Version", value=config.build_string, inline=False)
-        info.add_field(
-                        name="Developers",
-                        value=
-                        '''kainaght
-                            papertoy1127
-                            ppapman1
-                            321PLEK
-                            Abiria
-                            DEN316''',
-                        inline=False
-                        )
-        info.add_field(
-                        name="Server info",
-                        value=(
-                            f'''
-                            **python :** {sys.version}
-                            **Server OS :** {platform.system()}
-                            **Server Chip :** {platform.machine()}
-                            '''
+        info.add_field(name="Developers",
+                       value=
+                       '''kainaght
+papertoy1127
+ppapman1
+321PLEK
+Abiria
+DEN316''',
+                       inline=False
+                       )
+        info.add_field(name="Server Info",
+                       value=
+                       f'''**Python :** {sys.version}
+**Server OS :** {platform.system()}
+**Server Chip :** {platform.machine()}
+**discord.py :** {discord.__version__}
+                            ''',
+                       inline=False
+                       )
+        info.add_field(name="Bot Prefix",
+                       value=
+                       f'**prefix :** {config.bot_prefix}',
+                       inline=False
+                       )
 
-                            )
-
-                    )
-        info.add_field(
-                        name="bot prefix",
-                        value=(
-                            f'''
-                            **prefix :** {config.bot_prefix}
-                            
-                            '''
-                        )
-                    )
-
-        info.set_thumbnail(url="https://cdn.discordapp.com/avatars/855652837236670464/334c3952a503bc101b8ced247a335c05.webp?size=256")
+        info.set_thumbnail(
+            url="https://cdn.discordapp.com/avatars/855652837236670464/334c3952a503bc101b8ced247a335c05.webp?size=256")
 
         await ctx.send(
-            embed=info 
+            embed=info
         )
-    @debug.command(name='hellothisisverification', aliases=["소유자","개발자"])
+
+    @debug.command(name='hellothisisverification', aliases=["소유자", "개발자"])
     async def hellothisisverification(self, ctx):
         await ctx.send("봇 소유자들")
         await ctx.send("Kainaght#2847, PERIOT#5492, DEN316#1046, ppapman#6448, Abiria#8724")
+
 
 def setup(bot):
     bot.add_cog(Debug(bot))

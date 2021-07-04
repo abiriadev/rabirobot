@@ -65,6 +65,7 @@ class EventHandler(commands.Cog):
 
         # IGNORE EXCEPTIONS
         if isinstance(error, (commands.CommandNotFound)):
+            print(error)
             return
             
         # User Input Error

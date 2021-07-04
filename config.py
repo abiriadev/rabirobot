@@ -25,7 +25,8 @@ extensions = [
     'cogs.money',
     'cogs.event',
     'cogs.vote',
-    'cogs.leveling'
+    'cogs.leveling',
+    'cogs.testing'
 ]
 curses = []
 cursefile = open("./curses.txt", encoding="UTF8")

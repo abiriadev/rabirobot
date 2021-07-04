@@ -1,7 +1,11 @@
 import asyncio
+from typing import Union, Optional
 
 import discord
+from discord import Thread
+from discord.abc import PrivateChannel
 from discord.ext import commands
+from discord import guild
 
 from data import db
 
@@ -10,15 +14,19 @@ async def refresh_verification(bot: commands.Bot):
     while True:
         for ukey in db.database.players.keys():
             user = db.database.Player(ukey)
-            chnId = user.vf_message_channel
+            chnId: Optional[int] = user.vf_message_channel
             msgId = user.vf_message_id
 
             if (chnId is None) or (msgId is None):
                 continue
 
             print(f"Checking user {ukey}")
-
-            chn: discord.TextChannel = await bot.fetch_channel(chnId)
+            try:
+                chn: Union[guild.GuildChannel, PrivateChannel, Thread] = await bot.fetch_channel(chnId)
+            except discord.Forbidden:
+                user.vf_message_channel = None
+                print(f"Channel cannot be accessed")
+                return
 
             if chn is None:
                 user.vf_message_channel = None
