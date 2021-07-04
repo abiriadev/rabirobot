@@ -1,17 +1,27 @@
-from typing import Union, Optional
 import inspect
+import platform
+import sys
+from io import StringIO
 from pprint import pformat
+from typing import Union, Optional
 
 import discord
+import pip._internal
 from discord.ext import commands
 
-from data import db
 import config
-import sys
-import os
-import platform
+from data import db
 
 
+class Capturing(list):
+    def __enter__(self):
+        self._stdout = sys.stdout
+        sys.stdout = self._stringio = StringIO()
+        return self
+    def __exit__(self, *args):
+        self.extend(self._stringio.getvalue().splitlines())
+        del self._stringio    # free up some memory
+        sys.stdout = self._stdout
 # from psutil import _psutil_windows
 # import psutil
 # mem = psutil.virtual_memory()
@@ -33,7 +43,7 @@ class Debug(commands.Cog):
         embed = discord.Embed(
             title="🛠 도움말",
             description=f"""[디버그: 명령어 모음]
-저장 : 변경된 정보를 저장함.
+저장:변경된 정보를 저장함.
 돈주기: 입력한 수만큼 선택 유저에게 돈을 지급(-도 가능.)
 도움말: 이 도움말 메세지를 표시함.
 돈설정: 선택한 유저의 돈의 데이터를 덮어씌움.
@@ -176,18 +186,27 @@ Abiria
 DEN316''',
                        inline=False
                        )
+        version = discord.__version__
+        with Capturing() as output:
+            pip._internal.main(['show', 'discord.py'])
+
+        for i in output:
+            if "Version: " in i:
+                version = i.replace("Version: ", "")
+                print(version)
+
         info.add_field(name="Server Info",
                        value=
-                       f'''**Python :** {sys.version}
-**Server OS :** {platform.system()}
-**Server Chip :** {platform.machine()}
-**discord.py :** {discord.__version__}
+                       f'''**Python:** {sys.version}
+**Server OS:** {platform.system()}
+**Server Chip:** {platform.machine()}
+**discord.py:** {version}
                             ''',
                        inline=False
                        )
         info.add_field(name="Bot Prefix",
                        value=
-                       f'**prefix :** {config.bot_prefix}',
+                       f'**prefix:** {config.bot_prefix}',
                        inline=False
                        )
 
