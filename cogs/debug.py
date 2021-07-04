@@ -7,8 +7,12 @@ from discord.ext import commands
 
 from data import db
 import config
-
-
+import sys
+import os
+import platform
+# from psutil import _psutil_windows
+# import psutil
+# mem = psutil.virtual_memory()
 class Debug(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -32,7 +36,7 @@ class Debug(commands.Cog):
             도움말: 이 도움말 메세지를 표시함.
             돈설정: 선택한 유저의 돈의 데이터를 덮어씌움.
             eval : 파이썬의 eval 함수를 실행시킴.
-            info : 봇 정보를 출력함
+            info : 봇 정보를 출력함.
             """,
             color=discord.Colour.red()
         )
@@ -164,7 +168,7 @@ class Debug(commands.Cog):
         info = discord.Embed(
                 title='Bot info',
                 description="",
-                color=discord.Colour.red()
+                color=discord.Colour.green()
             )
 
         info.add_field(name="Version", value=config.build_string, inline=False)
@@ -175,9 +179,31 @@ class Debug(commands.Cog):
                             papertoy1127
                             ppapman1
                             321PLEK
-                            Abiria''',
+                            Abiria
+                            DEN316''',
                         inline=False
                         )
+        info.add_field(
+                        name="Server info",
+                        value=(
+                            f'''
+                            **python :** {sys.version}
+                            **Server OS :** {platform.system()}
+                            **Server Chip :** {platform.machine()}
+                            '''
+
+                            )
+
+                    )
+        info.add_field(
+                        name="bot prefix",
+                        value=(
+                            f'''
+                            **prefix :** {config.bot_prefix}
+                            
+                            '''
+                        )
+                    )
 
         info.set_thumbnail(url="https://cdn.discordapp.com/avatars/855652837236670464/334c3952a503bc101b8ced247a335c05.webp?size=256")
 
