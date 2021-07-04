@@ -1,5 +1,3 @@
 pyyaml
-discord.py
 googletrans==4.0.0-rc1
 discord.py @ git+https://github.com/Rapptz/discord.py@c748e4bce58a74cfb6c8778693a3f034cbdf9a67
-discord==1.0.1
