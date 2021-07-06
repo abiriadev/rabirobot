@@ -1,11 +1,9 @@
-import random
 from typing import Union, Optional
 
 import discord
-
-from data import db
 from discord.ext import commands
 
+from data import db
 from files.emoji import CustomEmoji
 
 
@@ -13,14 +11,13 @@ class Vote(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-
     @commands.group(name='투표', aliases=['vote'])
     async def vote(self, ctx):
         ...
 
     @vote.command(name='만들기', aliases=['create', 'new', '제작'])
     async def create_vote(self, ctx: commands.Context, channel: Union[discord.TextChannel, None], title='제목 없는 투표',
-                            desc=''):
+                          desc=''):
         if channel is None:
             channel = ctx.channel
         if title is None:
@@ -29,7 +26,7 @@ class Vote(commands.Cog):
             desc = ""
         if channel.id in db.database.votes.keys():
             await ctx.send(
-                embed=discord.Embed(title="", description="🛑 이미 진행 중인 투표가 있습니다!", color=discord.Colour.red()))
+                embed=discord.Embed(title="🛑 이미 진행 중인 투표가 있습니다!", color=discord.Colour.red()))
             return
         vote = db.database.Vote(channel.id)
         vote.title = title
@@ -44,7 +41,7 @@ class Vote(commands.Cog):
 
         if channel.id not in db.database.votes.keys():
             await ctx.send(
-                embed=discord.Embed(title="", description="🛑 채널에 진행 중인 투표가 없습니다!", color=discord.Colour.red()))
+                embed=discord.Embed(title="🛑 채널에 진행 중인 투표가 없습니다!", color=discord.Colour.red()))
             return
         vote = db.database.Vote(channel.id)
         await ctx.send(embed=vote.preview)
@@ -60,18 +57,18 @@ class Vote(commands.Cog):
 
         if channel.id not in db.database.votes.keys():
             await ctx.send(
-                embed=discord.Embed(title="", description="🛑 채널에 제작 중인 투표가 없습니다!", color=discord.Colour.red()))
+                embed=discord.Embed(title="🛑 채널에 제작 중인 투표가 없습니다!", color=discord.Colour.red()))
             return
         vote = db.database.Vote(channel.id)
 
         if vote.published:
             await ctx.send(
-                embed=discord.Embed(title="", description="🛑 이미 시작된 투표에 항목을 추가할 수 없습니다!", color=discord.Colour.red()))
+                embed=discord.Embed(title="🛑 이미 시작된 투표에 항목을 추가할 수 없습니다!", color=discord.Colour.red()))
             return
 
         if len(vote.fields) >= 20:
             await ctx.send(
-                embed=discord.Embed(title="", description="🛑 투표의 항목은 최대 20개까지 가능합니다!", color=discord.Colour.red()))
+                embed=discord.Embed(title="🛑 투표의 항목은 최대 20개까지 가능합니다!", color=discord.Colour.red()))
             return
 
         vote.fields.append(value)
@@ -86,19 +83,19 @@ class Vote(commands.Cog):
 
         if channel.id not in db.database.votes.keys():
             await ctx.send(
-                embed=discord.Embed(title="", description="🛑 채널에 제작 중인 투표가 없습니다!", color=discord.Colour.red()))
+                embed=discord.Embed(title="🛑 채널에 제작 중인 투표가 없습니다!", color=discord.Colour.red()))
             return
         vote = db.database.Vote(channel.id)
 
         if vote.published:
             await ctx.send(
-                embed=discord.Embed(title="", description="🛑 이미 시작된 투표에서 항목을 삭제할 수 없습니다!", color=discord.Colour.red()))
+                embed=discord.Embed(title="🛑 이미 시작된 투표에서 항목을 삭제할 수 없습니다!", color=discord.Colour.red()))
             return
 
         if value is None:
             if len(vote.fields) == 0:
                 await ctx.send(
-                    embed=discord.Embed(title="", description="🛑 투표에 항목이 없습니다!", color=discord.Colour.red()))
+                    embed=discord.Embed(title="🛑 투표에 항목이 없습니다!", color=discord.Colour.red()))
             else:
                 await ctx.send(
                     embed=discord.Embed(title="", description="투표에서 마지막 항목을 제거하였습니다.", color=discord.Colour.blurple()))
@@ -110,7 +107,8 @@ class Vote(commands.Cog):
             if value in vote.fields:
                 vote.fields.remove(value)
                 await ctx.send(
-                    embed=discord.Embed(title="", description=f"투표에서 {value} 항목을 제거하였습니다.", color=discord.Colour.blurple()))
+                    embed=discord.Embed(title="", description=f"투표에서 {value} 항목을 제거하였습니다.",
+                                        color=discord.Colour.blurple()))
             else:
                 await ctx.send(
                     embed=discord.Embed(title="", description=f"투표에 {value} 항목이 없습니다.",
@@ -133,13 +131,13 @@ class Vote(commands.Cog):
 
         if channel.id not in db.database.votes.keys():
             await ctx.send(
-                embed=discord.Embed(title="", description="🛑 채널에 제작 중인 투표가 없습니다!", color=discord.Colour.red()))
+                embed=discord.Embed(title="🛑 채널에 제작 중인 투표가 없습니다!", color=discord.Colour.red()))
             return
         vote = db.database.Vote(channel.id)
 
         if vote.published:
             await ctx.send(
-                embed=discord.Embed(title="", description="🛑 투표가 이미 시작되었습니다!", color=discord.Colour.red()))
+                embed=discord.Embed(title="🛑 투표가 이미 시작되었습니다!", color=discord.Colour.red()))
             return
 
         msg: discord.Message = await ctx.send(embed=vote.embed)
@@ -159,13 +157,13 @@ class Vote(commands.Cog):
 
         if channel.id not in db.database.votes.keys():
             await ctx.send(
-                embed=discord.Embed(title="", description="🛑 채널에 진행 중인 투표가 없습니다!", color=discord.Colour.red()))
+                embed=discord.Embed(title="🛑 채널에 진행 중인 투표가 없습니다!", color=discord.Colour.red()))
             return
         vote = db.database.Vote(channel.id)
 
         if not vote.published:
             await ctx.send(
-                embed=discord.Embed(title="", description="🛑 투표가 시작되지 않았습니다!", color=discord.Colour.red()))
+                embed=discord.Embed(title="🛑 투표가 시작되지 않았습니다!", color=discord.Colour.red()))
             return
 
         msg: discord.Message = await channel.fetch_message(vote.messageId)
@@ -193,7 +191,7 @@ class Vote(commands.Cog):
 
         if channel.id not in db.database.votes.keys():
             await ctx.send(
-                embed=discord.Embed(title="", description="🛑 채널에 진행 중인 투표가 없습니다!", color=discord.Colour.red()))
+                embed=discord.Embed(title="🛑 채널에 진행 중인 투표가 없습니다!", color=discord.Colour.red()))
             return
         vote = db.database.Vote(channel.id)
 

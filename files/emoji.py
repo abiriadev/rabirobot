@@ -1,4 +1,8 @@
 class CustomEmoji:
+    unchecked = '<:unchecked:861811466860757012>'
+    checked = '<:checked:861811466872029244>'
+    timeout = '<:timeout:861819279052505089>'
+
     empty = '<:empty:817693554658639882>'
     next = '<:next:769502361827409930>'
 

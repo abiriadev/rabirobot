@@ -1,6 +1,5 @@
 import datetime
 import os
-import random
 from typing import Union
 
 import discord
@@ -24,8 +23,7 @@ class EventHandler(commands.Cog):
         print("--------------")
 
         build_channel: discord.TextChannel = await self.bot.fetch_channel(config.build_channel)
-        last_build = await build_channel.history(limit=1, oldest_first=False).flatten()
-        last_build: discord.Message = last_build[0]
+        last_build: discord.Message = (await build_channel.history(limit=1, oldest_first=False).flatten())[0]
         if len(last_build.embeds) == 0:
             config.build = 1
         else:
@@ -41,7 +39,7 @@ class EventHandler(commands.Cog):
             print("VERSION    |", config.version)
             print("DEBUG MODE |", config.debug)
             print()
-        config.build_string = f"{config.identifier.title()} Build {config.build}" if config.debug else f"{config.version}-{config.identifier}.{config.build}"
+        config.build_string = f"{config.identifier.title()} Build {config.build}" if config.debug else f"{config.version}{config.identifier}.{config.build}"
 
         build_embed = discord.Embed(title=config.build_string, color=discord.Color.random())
         build_embed._timestamp = datetime.datetime.utcnow()
@@ -60,14 +58,14 @@ class EventHandler(commands.Cog):
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx: commands.Context, error):
-        if ctx.message.content == "r/인증" or not db.database.Player(ctx.author.id).verified:
+        if ctx.message.content == f"{config.bot_prefix[0]}인증" or not db.database.Player(ctx.author.id).verified:
             return
 
         # IGNORE EXCEPTIONS
         if isinstance(error, (commands.CommandNotFound)):
             print(error)
             return
-            
+
         # User Input Error
         elif isinstance(error, commands.MissingRequiredArgument):
             error_desctiption = '명령어를 구성하는 필수 인자가 누락되었어요. 명령어를 제대로 사용했는지 확인해 주세요.'
@@ -86,7 +84,7 @@ class EventHandler(commands.Cog):
             error_desctiption = '이 명령어는 다이렉트 메시지에서는 사용할 수 없어요.'
 
         elif isinstance(error, commands.MissingPermissions):
-            error_desctiption = f'당신에게 {", ".join(error.missing_perms)} 권한이 없어요.'
+            error_desctiption = f'당신에게 {", ".join(error.missing_permissions)} 권한이 없어요.'
 
         elif isinstance(error, commands.CheckFailure):
             error_desctiption = '당신은 이 명령어를 실행할 수 있는 권한이 없어요.'
@@ -106,8 +104,8 @@ class EventHandler(commands.Cog):
 
         # code, system
         elif isinstance(error.original, (
-        IndexError, KeyError, NameError, OSError, SyntaxError, TabError, SystemError, TypeError, UnicodeError,
-        ValueError, AttributeError)):
+                IndexError, KeyError, NameError, OSError, SyntaxError, TabError, SystemError, TypeError, UnicodeError,
+                ValueError, AttributeError)):
             error_desctiption = '문법적인 오류가 발생했어요.'
 
         else:
@@ -142,33 +140,6 @@ class EventHandler(commands.Cog):
                     continue
                 if user in await r.users().flatten():
                     await msg.remove_reaction(r.emoji, user)
-
-    @commands.Cog.listener()
-    async def on_raw_reaction_remove(self, payload: discord.RawReactionActionEvent):
-        reaction: discord.RawReactionActionEvent = payload
-        user: Union[discord.Member, discord.User] = await self.bot.fetch_user(payload.user_id)
-
-        player = db.database.Player(user.id)
-
-        if str(reaction.emoji) == '☑️' and player.vf_message_id == payload.message_id:
-            print("asdf")
-            chn: discord.TextChannel = await self.bot.fetch_channel(reaction.channel_id)
-            msg: discord.Message = await chn.fetch_message(reaction.message_id)
-
-            kstnow = datetime.datetime.now()
-            now = datetime.datetime.utcnow()
-            when_verfy = kstnow.strftime('%H시 %M분 %S초 경 (UTC+9)')
-
-            embed = msg.embeds[0]
-            embed.description += f'\n\n{when_verfy} 약관 동의를 취소하셨어요.'
-            embed.color = discord.Colour.red()
-            embed._timestamp = now
-            player.vf_message_id = None
-            player.vf_message_channel = None
-
-            await msg.edit(embed=embed)
-            await msg.clear_reaction('☑️')
-
 
 
 def setup(bot):

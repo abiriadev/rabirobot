@@ -18,10 +18,13 @@ class Capturing(list):
         self._stdout = sys.stdout
         sys.stdout = self._stringio = StringIO()
         return self
+
     def __exit__(self, *args):
         self.extend(self._stringio.getvalue().splitlines())
-        del self._stringio    # free up some memory
+        del self._stringio  # free up some memory
         sys.stdout = self._stdout
+
+
 # from psutil import _psutil_windows
 # import psutil
 # mem = psutil.virtual_memory()
@@ -143,8 +146,7 @@ info: 봇 정보를 출력함.
         if not ('token' in args.lower() or
                 'secret' in args.lower() or
                 'config' in args.lower() or
-                config.bot_token in str(output)
-        ):
+                config.bot_token in str(output)):
             embed = discord.Embed(
                 title='📝 Eval',
                 color=0xFDCE4C
@@ -177,8 +179,7 @@ info: 봇 정보를 출력함.
 
         info.add_field(name="Version", value=config.build_string, inline=False)
         info.add_field(name="Developers",
-                       value=
-                       '''kainaght
+                       value='''kainaght
 papertoy1127
 ppapman1
 321PLEK
@@ -196,8 +197,7 @@ DEN316''',
                 print(version)
 
         info.add_field(name="Server Info",
-                       value=
-                       f'''**Python:** {sys.version}
+                       value=f'''**Python:** {sys.version}
 **Server OS:** {platform.system()}
 **Server Chip:** {platform.machine()}
 **discord.py:** {version}
@@ -205,8 +205,7 @@ DEN316''',
                        inline=False
                        )
         info.add_field(name="Bot Prefix",
-                       value=
-                       f'**prefix:** {config.bot_prefix}',
+                       value=f'**prefix:** {config.bot_prefix[0]}',
                        inline=False
                        )
 

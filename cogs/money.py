@@ -1,3 +1,4 @@
+import math
 from typing import *
 
 import discord
@@ -23,7 +24,7 @@ class Money(commands.Cog):
         else:
             if type(user) not in [discord.User, discord.Member]:
                 embed = discord.Embed(
-                    description=f"🛑 **{userstr}** 유저를 찾을 수 없습니다.",
+                    title=f"🛑 **{userstr}** 유저를 찾을 수 없습니다.",
                     color=discord.Colour.red()
                 )
                 await ctx.send(embed=embed)
@@ -49,7 +50,7 @@ class Money(commands.Cog):
 
         if type(user) not in [discord.User, discord.Member]:
             embed = discord.Embed(
-                description=f"🛑 **{userstr}** 유저를 찾을 수 없습니다.",
+                title=f"🛑 **{userstr}** 유저를 찾을 수 없습니다.",
                 color=discord.Colour.red()
             )
             await ctx.send(embed=embed)
@@ -60,13 +61,14 @@ class Money(commands.Cog):
 
         if give_from.money < amount:
             embed = discord.Embed(
-                description=f"🛑 돈이 충분하지 않습니다!",
+                title=f"🛑 돈이 충분하지 않습니다!",
                 color=discord.Colour.red()
             )
             await ctx.send(embed=embed)
             return
 
         if amount < 0:
+            amount = int(math.ceil(-1 * math.log10(-1 * amount)))
             give_from.money += amount
             embed = discord.Embed(
                 description=f"산신령 <- {amount * -1}{CustomEmoji.money} <- {ctx.author.mention}",
@@ -91,9 +93,10 @@ class Money(commands.Cog):
             color=discord.Colour.blurple()
         )
         await ctx.send(embed=embed)
-        @money.command(name="help", aliases=['도움말', '도움', '도', 'ㄷ', '명령어', '커맨드', 'commands', 'command', 'h'])
-        async def help(self, ctx):
-            await ctx.send("임시로적어놓은아무말안녕하세요카이나이트입니다도움말곧추가됩니다 ㄱㄷ")
+
+    @money.command(name="help", aliases=['도움말', '도움', '도', 'ㄷ', '명령어', '커맨드', 'commands', 'command', 'h'])
+    async def help(self, ctx):
+        await ctx.send("임시로적어놓은아무말안녕하세요카이나이트입니다도움말곧추가됩니다 ㄱㄷ")
 
 
 

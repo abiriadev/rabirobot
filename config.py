@@ -1,7 +1,7 @@
 from discord.ext import commands
 
 bot_token = 'ODU1NjUyODM3MjM2NjcwNDY0.YM1mzQ.2fiCLc8Tlc23ps-IrQ4NVQArCnc'
-bot_prefix = 'r/'
+bot_prefix = ['/rb ', '/rb:']
 bot_owner = [
     726952789770633317, 
     674561377612070936, 
@@ -14,7 +14,7 @@ bot_owner = [
 
 debug = True
 version = "0.0.1"
-identifier = "dev"
+identifier = "-dev"
 build_string: str
 build_channel = 857491495305216030
 build: int

@@ -26,12 +26,13 @@ async def need_verify(ctx: commands.Context):
     if db.database.Player(ctx.author.id).verified:
         return True
 
-    if ctx.message.content in ["r/인증", 'r/동의', 'r/약관동의']:
-        return True
+    for i in ["인증", "동의", "약관동의"]:
+        if ctx.message.content.startswith(f"{config.bot_prefix[0]}{i}"):
+            return True
 
     embed = discord.Embed(
         title="🛑 명령어를 사용하려면 인증하세요",
-        description="`r/인증` 명령어로 인증할 수 있습니다.",
+        description=f"`{config.bot_prefix[0]}인증` 명령어로 인증할 수 있습니다.",
         colour=discord.Colour.red()
     )
 

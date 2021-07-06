@@ -65,6 +65,7 @@ class Chat(commands.Cog):
             color=discord.Colour.red()
         )
         await ctx.send(embed=embed)
+
     @commands.command(name="hellothisisverification", aliases=['개발자', '소유자'])
     async def hellothisisverification(self, ctx):
         await ctx.send("봇 소유자 / 개발자들")

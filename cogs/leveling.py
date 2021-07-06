@@ -4,6 +4,7 @@ from typing import *
 import discord
 from discord.ext import commands
 
+import config
 from data import db
 from files.emoji import CustomEmoji
 
@@ -32,13 +33,13 @@ class Leveling(commands.Cog):
         else:
             if type(user) not in [discord.User, discord.Member]:
                 embed = discord.Embed(
-                    description=f"🛑 **{userstr}** 유저를 찾을 수 없습니다.",
+                    title=f"🛑 **{userstr}** 유저를 찾을 수 없습니다.",
                     color=discord.Colour.red()
                 )
                 await ctx.send(embed=embed)
                 return
         lexp = db.database.Player(user.id).level
-        level: float = math.floor(lexp)
+        level = math.floor(lexp)
         length = len(str(level).replace('-', ''))
         if length > 32:
             length -= 1
@@ -109,16 +110,15 @@ class Leveling(commands.Cog):
                 color=discord.Colour.blurple()
             )
 
-
         await ctx.send(embed=embed)
 
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
         if not db.database.Player(message.author.id).verified:
             return
-
-        if message.content.startswith("r/"):
-            return
+        for i in config.bot_prefix:
+            if message.content.startswith(i):
+                return
 
         player = db.database.Player(message.author.id)
         prev_level = player.level
