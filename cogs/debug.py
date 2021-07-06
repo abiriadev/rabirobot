@@ -122,7 +122,7 @@ info: 봇 정보를 출력함.
 
     @debug.command(name='레벨확인', aliases=['checklevel'])
     async def checklevel(self, ctx: commands.Context,
-                         user: Optional[Union[discord.Member, discord.User]] = None):
+                            user: Optional[Union[discord.Member, discord.User]] = None):
         if user is None:
             user = ctx.author
 
@@ -158,35 +158,35 @@ info: 봇 정보를 출력함.
 
         elif 'eval' in args.lower() or 'exec' in args.lower():
             embed = discord.Embed(title='🛑 제한됨',
-                                  description='eval이나 exec 등은 사용할 수 없습니다.',
-                                  color=discord.Colour.red()
-                                  )
+                                    description='eval이나 exec 등은 사용할 수 없습니다.',
+                                    color=discord.Colour.red()
+                                    )
 
         else:
             embed = discord.Embed(title='🛑 제한됨',
-                                  description='민감한 정보는 전송할 수 없습니다.',
-                                  color=discord.Colour.red()
-                                  )
+                                    description='민감한 정보는 전송할 수 없습니다.',
+                                    color=discord.Colour.red()
+                                    )
 
         await ctx.send(embed=embed)
 
     @debug.command(name="version", aliases=['ver', 'info', '버전', '정보'])
     async def botversion(self, ctx):
         info = discord.Embed(title='Bot info',
-                             description="",
-                             color=discord.Colour.green()
-                             )
+                                description="",
+                                color=discord.Colour.green()
+                                )
 
         info.add_field(name="Version", value=config.build_string, inline=False)
         info.add_field(name="Developers",
-                       value='''kainaght
-papertoy1127
-ppapman1
-321PLEK
-Abiria
-DEN316''',
-                       inline=False
-                       )
+                        value='''kainaght
+                            papertoy1127
+                            ppapman1
+                            321PLEK
+                            Abiria
+                            DEN316''',
+                        inline=False
+                        )
         version = discord.__version__
         with Capturing() as output:
             pip._internal.main(['show', 'discord.py'])
@@ -197,17 +197,17 @@ DEN316''',
                 print(version)
 
         info.add_field(name="Server Info",
-                       value=f'''**Python:** {sys.version}
+                        value=f'''**Python:** {sys.version}
 **Server OS:** {platform.system()}
 **Server Chip:** {platform.machine()}
 **discord.py:** {version}
                             ''',
-                       inline=False
-                       )
+                        inline=False
+                        )
         info.add_field(name="Bot Prefix",
-                       value=f'**prefix:** {config.bot_prefix[0]}',
-                       inline=False
-                       )
+                        value=f'**prefix:** {config.bot_prefix[0]}',
+                        inline=False
+                        )
 
         info.set_thumbnail(
             url="https://cdn.discordapp.com/avatars/855652837236670464/334c3952a503bc101b8ced247a335c05.webp?size=256")

@@ -14,6 +14,11 @@ players:
     money: 0
     vf_message_channel: null
     vf_message_id: null
+  285185716240252929:
+    level: 0
+    money: 0
+    vf_message_channel: null
+    vf_message_id: null
   415135882006495242:
     level: 0
     money: 0
@@ -65,7 +70,7 @@ players:
     vf_message_channel: null
     vf_message_id: null
   536517275667267605:
-    level: 0.1339691597831751
+    level: 0.2679383195663502
     money: 0
     vf_message_channel: 855790087317356554
     vf_message_id: 861857873952899092
@@ -96,7 +101,7 @@ players:
     vf_message_id: null
   674561377612070936:
     level: 0.8707995385906383
-    money: -100000000
+    money: -100000100
     vf_message_channel: 855790087317356554
     vf_message_id: 861827529185558528
   678613524318126130:
@@ -175,8 +180,8 @@ players:
     vf_message_channel: null
     vf_message_id: null
   726952789770633317:
-    level: 0.3684151894037316
-    money: 0
+    level: 1.5234394240171731
+    money: 100
     vf_message_channel: 855790087317356554
     vf_message_id: 861856272700801067
   736505056223821835:
@@ -210,6 +215,11 @@ players:
     vf_message_channel: null
     vf_message_id: null
   761561385477341185:
+    level: 0
+    money: 0
+    vf_message_channel: null
+    vf_message_id: null
+  764365162273964043:
     level: 0
     money: 0
     vf_message_channel: null

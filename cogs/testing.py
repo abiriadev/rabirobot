@@ -128,7 +128,7 @@ class Teselect(discord.ui.View):
         self.message = message
 
     @discord.ui.select(placeholder="sans", custom_id="teselect:asdf",
-                       options=[discord.SelectOption(label="wa", value="와"),
+                        options=[discord.SelectOption(label="wa", value="와"),
                                 discord.SelectOption(label="sans", value="샌즈"),
                                 discord.SelectOption(label="asineunguna", value="아시는구나")])
     async def wasans(self, select: discord.ui.Select, interaction: discord.Interaction):

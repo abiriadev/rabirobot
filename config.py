@@ -9,12 +9,13 @@ bot_owner = [
     536517275667267605, 
     825244975226421248, 
     533260359604109342, 
-    662201438621138954
+    662201438621138954,
+    698706307678470225
 ]
 
 debug = True
 version = "0.0.1"
-identifier = "-dev"
+identifier = "dev"
 build_string: str
 build_channel = 857491495305216030
 build: int

@@ -17,8 +17,8 @@ class Verify(commands.Cog):
     @commands.command(name='약관', aliases=['이용약관'])
     async def tos(self, ctx):
         link = discord.ui.Button(url="https://www.notion.so/Rabirobot-30121c825ed34e6591698f51f6312b35",
-                                 label="Rabirobot 이용약관",
-                                 style=discord.ButtonStyle.blurple)
+                                    label="Rabirobot 이용약관",
+                                    style=discord.ButtonStyle.blurple)
         view = discord.ui.View()
         view.add_item(link)
         await ctx.send(embed=discord.Embed(description="**약관 확인하기**", colour=discord.Colour.blurple()), view=view)
@@ -67,7 +67,7 @@ class Verify(commands.Cog):
             embed._timestamp = datetime.utcnow()
             accept_view = discord.ui.View()
             button = discord.ui.Button(custom_id=f"confirm_{confirm_message.id}", emoji=CustomEmoji.unchecked,
-                                       style=discord.ButtonStyle.gray, label="약관에 동의합니다.")
+                                        style=discord.ButtonStyle.gray, label="약관에 동의합니다.")
             responded = False
 
             async def confirm(interaction: discord.Interaction):
